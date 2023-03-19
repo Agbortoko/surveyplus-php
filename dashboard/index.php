@@ -27,7 +27,7 @@
                           </ol>
 
                       </div>
-                      <div class="col-md-6 text-end">
+                      <div class="col-md-6 text-start text-md-end mb-5 mb-md-0">
                          
                         <?php if(isset($_SESSION["handle"]) & !empty($_SESSION["handle"])): ?>
                             <p class="mb-0 fs-2"><?= $_SESSION["full_name"] ?> </p>
