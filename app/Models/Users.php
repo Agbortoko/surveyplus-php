@@ -5,7 +5,7 @@ namespace Surveyplus\App\Models;
 
 final class Users extends BaseModel 
 {
-
+    /** @var string Table name for this model */
     public string $table = "user";
 
 

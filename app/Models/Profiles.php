@@ -4,7 +4,7 @@ namespace Surveyplus\App\Models;
 
 class Profiles extends BaseModel
 {
-
+    /** @var string Table name for this model */
     public string $table = "profile";
 
 
