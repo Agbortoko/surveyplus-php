@@ -15,7 +15,7 @@ class UserController
 
     public function show()
     {
-        return $this->users->getUsers();
+        return $this->users->get();
     }
 
 

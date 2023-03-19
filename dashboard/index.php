@@ -14,10 +14,24 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Dashboard</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Dashboard</li>
-                    </ol>
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+
+                          <h1 class="mt-4">Dashboard</h1>
+                          <ol class="breadcrumb mb-4">
+                              <li class="breadcrumb-item active">Dashboard</li>
+                          </ol>
+
+                      </div>
+                      <div class="col-md-6 text-end">
+                         
+                        <?php if(isset($_SESSION["handle"]) & !empty($_SESSION["handle"])): ?>
+                            <p class="mb-0 fs-2"><?= $_SESSION["full_name"] ?> </p>
+                            <p class="mb-0 fs-5"><?= $_SESSION["handle"] ?> </p>
+                        <?php endif ?>
+                         
+                      </div>
+                    </div>
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">

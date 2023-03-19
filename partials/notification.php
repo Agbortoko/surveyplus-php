@@ -5,6 +5,13 @@
                 <p class="mb-0 fs-3 fw-bold text-center">User Account Created Successfully <a href="<?= base_url("login.php") ?>" class="btn btn-primary text-white ms-4 mt-3 mt-sm-0">Login Now</a></p>
 
             <?php endif ?>
+
+
+            <?php if ($_GET['success'] == "created") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Profile Created Successfully</p>
+
+            <?php endif ?>
+            
         </div>
     </div>
 <?php endif ?>
@@ -30,6 +37,14 @@
 
             <?php if ($_GET['error'] == "authfailed") : ?>
                 <p class="mb-0 fs-5 fw-bold text-center">Authentication failed please try again!</p>
+            <?php endif ?>
+
+            <?php if ($_GET['error'] == "profilenotcreated") : ?>
+                <p class="mb-0 fs-5 fw-bold text-center">Sorry! Profile not created please try again!</p>
+            <?php endif ?>
+
+            <?php if ($_GET['error'] == "usernameexists") : ?>
+                <p class="mb-0 fs-5 fw-bold text-center">Sorry! Username not available</p>
             <?php endif ?>
 
         </div>

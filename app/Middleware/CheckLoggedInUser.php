@@ -15,37 +15,40 @@ final class CheckLoggedInUser
      
     }
 
-    public function auth()
-    {
-    
-        if(!(isset( $_SESSION['user_id'] ) || empty( $_SESSION['user_id'] ))){
 
-            header("Location:" . base_url("login.php"));
-            exit(0);
-        }
-
-        $numberOfProfiles = count($this->profiles->find($_SESSION['user_id']));
-    
-        // Check if user has any saved profile else let him create a profile
-        if($numberOfProfiles == 0){
-
-            header("Location:" . base_url("create_profile.php?step=1"));
-            exit(0);
-
-        }
-
-    }
-
-
-    public function userOnly()
+    /**
+     * Accessible to users only
+     *
+     * @return redirect Redirect to the login page
+     */
+    public function user_only()
     {
         
         if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
 
-            header("Location:" . base_url("login.php"));
-            exit(0);
+            return header("Location:" . base_url("login.php"));
         }
 
     }
+
+
+    /**
+     * Create profile incase of no profile
+     *
+     * @return redirect Redirect to the create profile page
+     */
+    public function create_profile()
+    {
+        $numberOfProfiles = count($this->profiles->find($_SESSION['user_id']));
+        
+        // Check if user has any saved profile else let him create a profile
+        if($numberOfProfiles == 0){
+
+            return header("Location:" . base_url("create_profile.php"));
+
+        }
+    }
+
+
 
 }

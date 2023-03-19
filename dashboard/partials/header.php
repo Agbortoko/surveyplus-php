@@ -2,7 +2,8 @@
 <?php session_start(); ?>
 <?php
     $check = new Surveyplus\App\Middleware\CheckLoggedInUser();
-    $check->auth();
+    $check->user_only();
+    $check->create_profile();
 ?>
 <!DOCTYPE html>
 <html lang="en">
