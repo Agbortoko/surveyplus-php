@@ -63,7 +63,7 @@ class UserController
             $_SESSION['user_id'] = $dbUserId;
             $_SESSION['isAdmin'] = $isAdmin;
             
-            // Get user profile data
+            // Get users active profile data
             $profiles = $this->profiles->find($dbUserId, 1);
 
             // Add info to session

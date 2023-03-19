@@ -26,7 +26,7 @@ if (isset($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
     if (!empty($username)) {
         $handle = "@" . str_replace(" ", "_", strtolower($username));
     } else {
-        $handle = "";
+        $handle = null;
     }
 
     // Check for empty fields
@@ -40,6 +40,7 @@ if (isset($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
 
     $profile = new ProfileController();
 
+    // Verify if username already exists
     if ($profile->username_exists($username)) {
         header("Location:" . base_url("create_profile.php?error=usernameexists"));
         exit(0);
@@ -58,7 +59,7 @@ if (isset($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
         "gender_id" => $gender_id
     ];
 
-    // If at least one profile is active, set the others created by the user to inactive
+    // If at least one profile is active, set the others created by thesame user to inactive
 
     if($profile->active_profiles($user_id)){
 
@@ -78,7 +79,7 @@ if (isset($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
         exit(0);
     }
 
-
+    // Set profile information in session
     $_SESSION['full_name'] = $data["first_name"] . " " . $data["last_name"];
     $_SESSION["handle"] = $data["handle"];
 
