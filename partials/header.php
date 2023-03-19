@@ -11,6 +11,8 @@
     <meta name="description" content="SURVEYplus is best survey system to empower organisations to gain insights from customers, employees and the market – securely and at scale. "/>
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
 
+    <link rel="shortcut icon" href="<?= base_url("images/favicon.png") ?>" type="image/x-icon">
+
     <link rel="canonical" href="" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />

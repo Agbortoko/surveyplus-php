@@ -3,14 +3,17 @@
 namespace Surveyplus\App\Controllers;
 
 use Surveyplus\App\Models\Users;
+use Surveyplus\App\Models\Profiles;
 
 class UserController 
 {
     public Users $users;
+    public Profiles $profiles;
 
     public function __construct()
     {
         $this->users = new Users();
+        $this->profiles = new Profiles();
     }
 
     public function show()
@@ -35,12 +38,14 @@ class UserController
     public function auth(string $email, string $password)
     {
         $users = $this->users->find($email);
-
+        
+        
+        
         if(count($users) == 0){
             return false;
         }
 
-
+        
         foreach($users as $user){
             $dbUserId = $user['id'];
             $dbEmail = $user['email'];
@@ -48,15 +53,24 @@ class UserController
             $isAdmin = $user['isAdmin'];
             
         }
-
+        
         $verifyPassword = password_verify($password, $dbPassword);
 
-
+        
         if($verifyPassword && ($dbEmail == $email)){
             
             session_start();
             $_SESSION['user_id'] = $dbUserId;
             $_SESSION['isAdmin'] = $isAdmin;
+            
+            // Get user profile data
+            $profiles = $this->profiles->find($dbUserId, 1);
+
+            // Add info to session
+            foreach($profiles as $profile){
+                $_SESSION['full_name'] = $profile["first_name"] . " " . $profile["last_name"];
+                $_SESSION["handle"] = $profile["handle"];
+            }
 
             return true;
         }

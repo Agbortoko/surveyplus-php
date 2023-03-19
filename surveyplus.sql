@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2023 at 08:36 PM
+-- Generation Time: Mar 19, 2023 at 10:47 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -80,6 +80,7 @@ CREATE TABLE `profile` (
   `createdOn` timestamp NOT NULL DEFAULT current_timestamp(),
   `handle` varchar(45) DEFAULT NULL,
   `signature` varchar(45) DEFAULT NULL,
+  `isActive` tinyint(1) NOT NULL,
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `gender_id` int(11) NOT NULL
@@ -89,8 +90,8 @@ CREATE TABLE `profile` (
 -- Dumping data for table `profile`
 --
 
-INSERT INTO `profile` (`id`, `first_name`, `last_name`, `username`, `dob`, `createdOn`, `handle`, `signature`, `user_id`, `role_id`, `gender_id`) VALUES
-(1, 'Flash', 'Walker', 'walker', '1994-10-18', '2023-03-19 19:33:08', '@walker', 'FlashWalker', 1, 2, 1);
+INSERT INTO `profile` (`id`, `first_name`, `last_name`, `username`, `dob`, `createdOn`, `handle`, `signature`, `isActive`, `user_id`, `role_id`, `gender_id`) VALUES
+(1, 'Flash', 'Walker', 'flashwalker', '2023-03-08', '2023-03-19 21:46:54', '@flashwalker', 'fwalker', 1, 1, 2, 1);
 
 -- --------------------------------------------------------
 

@@ -9,15 +9,27 @@ class Profiles extends BaseModel
 
 
     /**
-     * Find a user id in profile
+     *Find all profiles with user id
      *
      * @param integer $userId
      * @return array An array of profiles found
      */
-    public function find(int $userId)
+    public function find_all(int $userId)
     {
-
         $profiles = $this->select("SELECT * FROM $this->table WHERE user_id = $userId")->findAll();
+        return $profiles;
+    }
+
+    /**
+     * Find active or inactive profiles with user id
+     *
+     * @param integer $userId
+     * @param integer $state 1 for active and 0 for inactive
+     * @return array An array of profiles found
+     */
+    public function find(int $userId, int $state)
+    {
+        $profiles = $this->select("SELECT * FROM $this->table WHERE user_id = $userId AND isActive = $state")->findAll();
         return $profiles;
     }
 
@@ -30,7 +42,7 @@ class Profiles extends BaseModel
     public function save(array $data)
     {
 
-        $this->stmt = $this->conn->prepare("INSERT INTO $this->table (first_name, last_name, username, dob, handle, signature, user_id, role_id, gender_id) VALUES (:first_name, :last_name, :username, :dob, :handle, :signature, :user_id, :role_id, :gender_id)");
+        $this->stmt = $this->conn->prepare("INSERT INTO $this->table (first_name, last_name, username, dob, handle, signature, isActive, user_id, role_id, gender_id) VALUES (:first_name, :last_name, :username, :dob, :handle, :signature, :isActive, :user_id, :role_id, :gender_id)");
 
         // Bind parameters to prepared indicators
 
@@ -40,6 +52,7 @@ class Profiles extends BaseModel
         $this->stmt->bindParam(":dob", $data["dob"]);
         $this->stmt->bindParam(":handle", $data["handle"]);
         $this->stmt->bindParam(":signature", $data["signature"]);
+        $this->stmt->bindParam(":isActive", $data["isActive"]);
         $this->stmt->bindParam(":user_id", $data["user_id"]);
         $this->stmt->bindParam(":role_id", $data["role_id"]);
         $this->stmt->bindParam(":gender_id", $data["gender_id"]);

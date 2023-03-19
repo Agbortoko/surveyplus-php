@@ -22,6 +22,8 @@ class ProfileController
         return true;
     }
 
+    
+
     public function username_exists(string $username){
 
         $profiles = $this->profiles->find_username($username);
@@ -32,4 +34,23 @@ class ProfileController
 
         return false;
     }
+
+
+    /**
+     * Verify if any active profile already exist
+     *
+     * @param integer $user_id
+     * @return void
+     */
+    public function active_profiles(int $user_id){
+        
+        $profiles = $this->profiles->find($user_id, 1);
+        
+        if(count($profiles) > 0){
+            return true;
+        }
+
+        return false;
+    }
+
 }

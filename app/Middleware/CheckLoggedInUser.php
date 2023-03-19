@@ -39,7 +39,7 @@ final class CheckLoggedInUser
      */
     public function create_profile()
     {
-        $numberOfProfiles = count($this->profiles->find($_SESSION['user_id']));
+        $numberOfProfiles = count($this->profiles->find_all($_SESSION['user_id']));
         
         // Check if user has any saved profile else let him create a profile
         if($numberOfProfiles == 0){

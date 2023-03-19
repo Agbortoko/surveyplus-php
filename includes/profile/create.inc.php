@@ -58,6 +58,16 @@ if (isset($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
         "gender_id" => $gender_id
     ];
 
+    // If at least one profile is active, set the others created by the user to inactive
+
+    if($profile->active_profiles($user_id)){
+
+        $data["isActive"]  = 0;
+
+    }else{
+        $data["isActive"] = 1;
+    }
+
 
     $save = $profile->create($data);
 
