@@ -5,6 +5,7 @@
 <?php require DASHBOARD_PATH . "/partials/header.php" ?>
 
 
+
 <body class="sb-nav-fixed">
 
     <?php require DASHBOARD_PATH . "/partials/navigation.php" ?>
