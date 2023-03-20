@@ -56,19 +56,31 @@ $all_surveys = $surveys->show();
                     <div class="container p-0 mt-3">
 
 
-                        <form action="">
+                        <form action="" method="POST">
 
 
                                <div class="form-group mb-4">
-                                    <label for="name" class="mb-2">Survey Name</label>
+                                    <label for="name" class="mb-2 fw-bold">Name</label>
                                     <input type="text" class="form-control border border-1 border-primary rounded-0" placeholder="Type your Survey Name" name="name">
                                </div> 
 
 
-                               <div class="form-group">
-                                    <label for="name" class="mb-2">Survey Description</label>
+                               <div class="form-group mb-4">
+                                    <label for="description" class="mb-2 fw-bold">Description</label>
                                     <textarea class="form-control border border-1 border-primary rounded-0" style="resize:none" name="description"></textarea>
                                </div> 
+
+                               <div class="form-group mb-4">
+                                    <label for="visibility" class="mb-2 fw-bold">Visibility</label>
+                                    <select name="visibility" class="form-select border border-1 border-primary rounded-0">
+                                        <option value="1">Publish</option>
+                                        <option value="2">Draft</0option>
+                                    </select>
+                               </div> 
+
+                               <div class="form-group">
+                                    <button type="submit" class="btn btn-primary rounded-0 w-100">Create Survey</button>
+                               </div>
 
 
                         </form>
