@@ -63,7 +63,10 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <?php if(isset($_SESSION["handle"]) & !empty($_SESSION["handle"])): ?>
+                            <p class="mb-0 fs-5"><?= $_SESSION["full_name"] ?> </p>
+                            <p class="mb-0 fs-6"><?= $_SESSION["handle"] ?> </p>
+                        <?php endif ?>
                     </div>
                 </nav>
             </div>
