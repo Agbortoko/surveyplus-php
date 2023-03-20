@@ -1,7 +1,7 @@
 <?php
 
 /** @var BASE_PATH The root absolute path of this project*/
-define("BASE_PATH", __DIR__);
+define("BASE_PATH", dirname(__DIR__, 1));
 
 /** @var BASE_URL The base url of this project */
 define("BASE_URL", "http://localhost/surveyplusweb");

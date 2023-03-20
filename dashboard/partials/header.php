@@ -1,4 +1,3 @@
-<?php require "./../vendor/autoload.php"; ?>
 <?php session_start(); ?>
 <?php
     $check = new Surveyplus\App\Middleware\CheckLoggedInUser();

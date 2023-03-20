@@ -15,7 +15,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">All Surveys</a>
+                                    <a class="nav-link" href="<?= DASHBOARD_URL . "/survey/" ?>">All Surveys</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Add Survey</a> <a class="nav-link" href="layout-sidenav-light.html">Categories</a>
                                 </nav>
                             </div>
