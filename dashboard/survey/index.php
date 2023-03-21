@@ -95,7 +95,7 @@ $all_surveys = $surveys->show();
 
                                                     <?php endif ?>
                                                 </td>
-                                                <td><?= $survey["description"] ?></td>
+                                                <td><?= minimize($survey["description"]) ?></td>
                                                 <td><?= $survey["createdOn"] ?></td>
                                                 <td><?= $survey["updatedOn"] ?></td>
                                                 <td>
@@ -108,7 +108,7 @@ $all_surveys = $surveys->show();
                                                 <td><?= $survey["expiresOn"] ?></td>
                                                 <td>
                                                     <?php if($survey["published"] != 1): ?>
-                                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                                       <a href="<?= DASHBOARD_URL . '/survey/delete.php?survey=' . $survey['id'] . '&action=delete' ?>" class="btn btn-danger btn-sm">Delete</a>
                                                     <?php endif ?>
                                                 </td>
                                             </tr>

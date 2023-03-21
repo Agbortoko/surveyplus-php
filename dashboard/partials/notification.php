@@ -18,6 +18,11 @@
             <?php if ($_GET['success'] == "updated" && $_GET['type'] == "survey") : ?>
                 <p class="mb-0 fs-3 fw-bold text-center">Survey Updated Successfully</p>
             <?php endif ?>
+
+
+            <?php if ($_GET['success'] == "deleted" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Survey Deleted Successfully</p>
+            <?php endif ?>
             
         </div>
     </div>
@@ -43,6 +48,14 @@
 
             <?php if ($_GET['error'] == "usernameexists") : ?>
                 <p class="mb-0 fs-5 fw-bold text-center">Sorry! Username not available</p>
+            <?php endif ?>
+
+            <?php if ($_GET['error'] == "deletenotallowed" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">You cannot delete a published survey!</p>
+            <?php endif ?>
+
+            <?php if ($_GET['error'] == "deletefailed" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Survey Delete Failed!</p>
             <?php endif ?>
 
         </div>

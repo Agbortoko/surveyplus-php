@@ -50,5 +50,27 @@ class SurveyController
     }
 
 
+    public function is_published(int $survey_id)
+    {
+        $published_surveys = $this->surveys->visibility($survey_id, 1);
+
+        if(count($published_surveys) > 0){
+            return true;
+        }
+
+        return false;
+    }
+
+    public function delete(int $survey_id)
+    {
+        $delete_survey = $this->surveys->delete($survey_id);
+
+        if($delete_survey){
+            return true;
+        }
+
+        return false;
+    }
+
 
 }

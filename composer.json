@@ -18,6 +18,7 @@
         },
 
         "files" : [
+            "helpers/string_helper.php",
             "helpers/url_helper.php",
             "helpers/debug_helper.php",
             "helpers/form_helper.php",

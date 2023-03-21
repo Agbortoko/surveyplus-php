@@ -76,6 +76,28 @@ final class Surveys extends BaseModel
         return true;
     }
 
+    
+
+    public function visibility(int $survey_id, int $state)
+    {
+        $surveys = $this->select("SELECT *  FROM $this->table WHERE id = $survey_id AND published = $state")->findAll();
+        
+        return $surveys;
+    }
+
+
+    public function delete(int $survey_id)
+    {
+        $this->stmt = $this->conn->prepare("DELETE FROM $this->table WHERE id = $survey_id");
+
+        if(!$this->stmt->execute())
+        {
+             return false;
+        }
+        return true;
+
+    }
+
 
 
 }  
