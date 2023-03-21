@@ -52,4 +52,30 @@ final class Surveys extends BaseModel
 
 
 
+
+    public function update(array $data, int $survey_id)
+    {
+
+
+        $updated_on = $data["updatedOn"];
+        $name = $data["name"];
+        $description = $data["description"];
+        $published = $data["published"];
+        $publishedOn = $data["publishedOn"];
+        $expiresOn = $data["expiresOn"];
+        $user_id = $data["user_id"];
+        
+        $this->stmt = $this->conn->prepare("UPDATE $this->table SET updatedOn = '$updated_on', name = '$name', description = '$description', published = $published, publishedOn = '$publishedOn', expiresOn = '$expiresOn', user_id = $user_id WHERE id = $survey_id");
+
+
+        if(!$this->stmt->execute())
+        {
+             return false;
+        }
+
+        return true;
+    }
+
+
+
 }  

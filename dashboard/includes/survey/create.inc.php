@@ -10,7 +10,7 @@ session_start();
 if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
 {
 
-    debug_array($_POST);
+    // debug_array($_POST);
     
     $profiles = new ProfileController();
     $surveys = new SurveyController();

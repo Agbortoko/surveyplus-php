@@ -14,6 +14,10 @@
             <?php if ($_GET['success'] == "saved" && $_GET['type'] == "survey") : ?>
                 <p class="mb-0 fs-3 fw-bold text-center">Survey Created Successfully</p>
             <?php endif ?>
+
+            <?php if ($_GET['success'] == "updated" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Survey Updated Successfully</p>
+            <?php endif ?>
             
         </div>
     </div>

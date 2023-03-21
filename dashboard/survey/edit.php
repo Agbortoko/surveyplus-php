@@ -68,6 +68,8 @@ if(isset($_GET["survey"]) && isset($_GET["action"]) && $_GET["action"] == "edit"
 
                         <form action="<?= DASHBOARD_URL . "/includes/survey/update.inc.php" ?>" method="POST">
 
+                                <input type="hidden" name="survey_id" value="<?= $survey_id ?>">
+
 
                                <div class="form-group mb-4">
                                     <label for="name" class="mb-2 fw-bold">Name <span class="text-danger">*</span></label>
@@ -87,7 +89,9 @@ if(isset($_GET["survey"]) && isset($_GET["action"]) && $_GET["action"] == "edit"
 
                                         <?php if($survey["published"] == 1): ?>
                                             <option value="1" selected>Published</option>
+                                            <option value="0">Not Published</option>
                                         <?php else: ?>
+                                            <option value="1">Published</option>
                                             <option value="0" selected>Not Published</option>
                                         <?php endif ?>
                                     </select>

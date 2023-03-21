@@ -29,11 +29,24 @@ class SurveyController
 
     }
 
+
+    // Get survey to modify
     public function edit(int $survey_id)
     {
         $survey = $this->surveys->get($survey_id);
         
         return $survey;
+    }
+    
+    
+     // Modify 
+    public function modify(array $data, int $survey_id)
+    {
+        if($this->surveys->update($data, $survey_id)){
+            return true;
+        }
+
+        return false;
     }
 
 

@@ -87,9 +87,13 @@ $all_surveys = $surveys->show();
                                             <tr>
                                                 <td>
                                                     <?= $survey["name"] ?>
-                                                    <div class="d-block p-0">
-                                                        <a href="<?= DASHBOARD_URL . '/survey/edit.php?survey=' . $survey['id'] . '&action=edit' ?>">Edit Survey</a>
-                                                    </div>
+                                                    <?php if($survey["published"] != 1): ?>
+
+                                                        <div class="d-block p-0">
+                                                            <a href="<?= DASHBOARD_URL . '/survey/edit.php?survey=' . $survey['id'] . '&action=edit' ?>">Edit Survey</a>
+                                                        </div>
+
+                                                    <?php endif ?>
                                                 </td>
                                                 <td><?= $survey["description"] ?></td>
                                                 <td><?= $survey["createdOn"] ?></td>
