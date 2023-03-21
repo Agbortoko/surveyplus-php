@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2023 at 02:46 PM
+-- Generation Time: Mar 21, 2023 at 03:02 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -152,16 +152,6 @@ CREATE TABLE `survey` (
   `expiresOn` date DEFAULT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `survey`
---
-
-INSERT INTO `survey` (`id`, `updatedOn`, `name`, `description`, `published`, `createdOn`, `publishedOn`, `expiresOn`, `user_id`) VALUES
-(2, NULL, 'What type of YouTube videos do you like', 'This survey is to verify the type of youtube ', 1, '2023-03-21 13:33:42', '2023-03-21 00:00:00', NULL, 1),
-(3, NULL, 'Is school difficult?', 'This is a survey with questions to find out i', 1, '2023-03-21 13:38:22', '2023-03-21 14:38:22', NULL, 1),
-(4, NULL, 'Survey to test information', 'This is a survey to test if this stuff is sta', 1, '2023-03-21 13:39:28', '2023-03-21 14:39:28', '2023-03-23', 1),
-(5, NULL, 'What type of YouTube videos do you like', 'This is another test', 0, '2023-03-21 13:42:09', NULL, '2023-03-24', 1);
 
 -- --------------------------------------------------------
 
@@ -335,7 +325,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `survey_taker`

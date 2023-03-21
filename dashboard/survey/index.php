@@ -63,6 +63,7 @@ $all_surveys = $surveys->show();
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Created</th>
+                                        <th>Updated</th>
                                         <th>Published</th>
                                         <th>Expires</th>
                                         <th>Action</th>
@@ -73,6 +74,7 @@ $all_surveys = $surveys->show();
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Created</th>
+                                        <th>Updated</th>
                                         <th>Published</th>
                                         <th>Expires</th>
                                         <th>Action</th>
@@ -83,11 +85,28 @@ $all_surveys = $surveys->show();
                                         <?php foreach ($all_surveys as $survey) : ?>
 
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
+                                                <td>
+                                                    <?= $survey["name"] ?>
+                                                    <div class="d-block p-0">
+                                                        <a href="#">Edit Survey</a>
+                                                    </div>
+                                                </td>
+                                                <td><?= $survey["description"] ?></td>
+                                                <td><?= $survey["createdOn"] ?></td>
+                                                <td><?= $survey["updatedOn"] ?></td>
+                                                <td>
+                                                    <?php if($survey["published"] == 1): ?>
+                                                        <span class="badge bg-primary">Published</span>
+                                                    <?php else: ?>
+                                                        <span class="badge bg-secondary">Not Published</span>
+                                                    <?php endif ?>
+                                                </td>
+                                                <td><?= $survey["expiresOn"] ?></td>
+                                                <td>
+                                                    <?php if($survey["published"] != 1): ?>
+                                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                                    <?php endif ?>
+                                                </td>
                                             </tr>
 
                                         <?php endforeach ?>
@@ -99,10 +118,6 @@ $all_surveys = $surveys->show();
                             </table>
                         </div>
                     </div>
-
-
-
-
 
                 </div>
             </main>

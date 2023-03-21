@@ -20,18 +20,35 @@ function base_url(string $link = null)
  */
 function url_is(string $link){
 
+    $base_url_segment = BASE_URL_SEGMENT;
 
-    if(str_contains($link, ".php")){
+    // checks if segment is empty or ""
+    if(empty($base_url_segment)){
 
-        $linkToVerify = "/" . $link;
+        if(str_contains($link, ".php")){
 
+            $linkToVerify = $link;
+    
+        }else{
+    
+            $linkToVerify =  $link . "/";
+        }
+
+        
     }else{
 
-        $linkToVerify =  "/" . $link . "/";
+        if(str_contains($link, ".php")){
+    
+            $linkToVerify = "/" . $link;
+    
+        }else{
+    
+            $linkToVerify =  "/" . $link . "/";
+        }
     }
 
+
    
-    
     if($_SERVER['REQUEST_URI'] != $linkToVerify){
         return false;
     }

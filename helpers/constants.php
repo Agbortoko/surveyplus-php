@@ -6,8 +6,8 @@ define("BASE_PATH", dirname(__DIR__, 1));
 /** @var BASE_URL The base url of this project */
 define("BASE_URL", "http://localhost/surveyplusweb");
 
-/** @var BASE_URL_PATH The base url path. Online this can be set to "" */
-define("BASE_URL_PATH", "surveyplusweb");
+/** @var BASE_URL_SEGMENT The base url path. Online this can be set to "" */
+define("BASE_URL_SEGMENT", "surveyplusweb");
 
 /** @var DASHBOARD_URL The dashboard url of this project */
 define("DASHBOARD_URL", BASE_URL . "/dashboard");
