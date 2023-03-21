@@ -14,10 +14,8 @@ htaccess files (or "distributed configuration files") provide a way to make conf
 ## Options to Implement
 
 
-2.2.1 Survey Creator
-The application shall allow Survey creators to:
-
-
+    2.2.1 Survey Creator
+    The application shall allow Survey creators to:
     • [REQ-SC-1] Create a survey
     • [REQ-SC-2] Update a survey that is unpublished
     • [REQ-SC-3] Delete a survey that is unpublished
