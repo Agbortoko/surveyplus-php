@@ -23,6 +23,10 @@ function url_is(string $link){
     $base_url_segment = BASE_URL_SEGMENT;
 
     // checks if segment is empty or ""
+    /**
+     * This constant is empty when using a domain name like surveyplus.com
+     * if working on localhost/surveyplus, the base url segment is "surveyplus"
+     */
     if(empty($base_url_segment)){
 
         if(str_contains($link, ".php")){

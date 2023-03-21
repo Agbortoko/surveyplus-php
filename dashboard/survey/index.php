@@ -88,7 +88,7 @@ $all_surveys = $surveys->show();
                                                 <td>
                                                     <?= $survey["name"] ?>
                                                     <div class="d-block p-0">
-                                                        <a href="#">Edit Survey</a>
+                                                        <a href="<?= DASHBOARD_URL . '/survey/edit.php?survey=' . $survey['id'] . '&action=edit' ?>">Edit Survey</a>
                                                     </div>
                                                 </td>
                                                 <td><?= $survey["description"] ?></td>
