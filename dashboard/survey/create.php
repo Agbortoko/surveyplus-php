@@ -74,7 +74,7 @@ $all_surveys = $surveys->show();
                                     <select name="visibility" class="form-select border border-1 border-primary rounded-0" required>
                                         <option selected disabled>Select Survey Visibility</option>
                                         <option value="1">Published</option>
-                                        <option value="0">Not Published</0option>
+                                        <option value="0">Not Published</option>
                                     </select>
                                </div> 
 

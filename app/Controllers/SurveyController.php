@@ -29,6 +29,13 @@ class SurveyController
 
     }
 
+    public function edit(int $survey_id)
+    {
+        $survey = $this->surveys->get($survey_id);
+        
+        return $survey;
+    }
+
 
 
 }
