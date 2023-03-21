@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2023 at 10:47 PM
+-- Generation Time: Mar 21, 2023 at 02:46 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -45,6 +45,15 @@ CREATE TABLE `answer_category` (
   `name` varchar(100) NOT NULL,
   `createdOn` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `answer_category`
+--
+
+INSERT INTO `answer_category` (`id`, `name`, `createdOn`) VALUES
+(1, 'one choice', '2023-03-21 13:45:59'),
+(2, 'multiple choice', '2023-03-21 13:45:59'),
+(3, 'free text', '2023-03-21 13:46:15');
 
 -- --------------------------------------------------------
 
@@ -137,11 +146,22 @@ CREATE TABLE `survey` (
   `updatedOn` datetime DEFAULT NULL,
   `name` varchar(45) NOT NULL,
   `description` varchar(45) NOT NULL,
+  `published` tinyint(1) NOT NULL,
   `createdOn` timestamp NOT NULL DEFAULT current_timestamp(),
   `publishedOn` datetime DEFAULT NULL,
-  `expiresOn` datetime DEFAULT NULL,
+  `expiresOn` date DEFAULT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `survey`
+--
+
+INSERT INTO `survey` (`id`, `updatedOn`, `name`, `description`, `published`, `createdOn`, `publishedOn`, `expiresOn`, `user_id`) VALUES
+(2, NULL, 'What type of YouTube videos do you like', 'This survey is to verify the type of youtube ', 1, '2023-03-21 13:33:42', '2023-03-21 00:00:00', NULL, 1),
+(3, NULL, 'Is school difficult?', 'This is a survey with questions to find out i', 1, '2023-03-21 13:38:22', '2023-03-21 14:38:22', NULL, 1),
+(4, NULL, 'Survey to test information', 'This is a survey to test if this stuff is sta', 1, '2023-03-21 13:39:28', '2023-03-21 14:39:28', '2023-03-23', 1),
+(5, NULL, 'What type of YouTube videos do you like', 'This is another test', 0, '2023-03-21 13:42:09', NULL, '2023-03-24', 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +209,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `isAdmin`, `createdOn`) VALUES
-(1, 'nani@email.com', '$2y$10$WaW/QXCK/Mla.h7renVvrOXvx5gCKpp0hkMAvTAV5f8bAQZ5BOACe', 0, '2023-03-18 14:31:53');
+(1, 'nani@email.com', '$2y$10$WaW/QXCK/Mla.h7renVvrOXvx5gCKpp0hkMAvTAV5f8bAQZ5BOACe', 0, '2023-03-18 14:31:53'),
+(2, 'mary@email.com', '$2y$10$.95aWlT6sV/9Ipif8zxMVuZqYZ1N0NWxVddWgAQyOMro2VsmPuKkC', 0, '2023-03-20 01:20:35');
 
 --
 -- Indexes for dumped tables
@@ -284,7 +305,7 @@ ALTER TABLE `answer`
 -- AUTO_INCREMENT for table `answer_category`
 --
 ALTER TABLE `answer_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `gender`
@@ -314,7 +335,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `survey_taker`
@@ -332,7 +353,7 @@ ALTER TABLE `survey_taker_answer`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

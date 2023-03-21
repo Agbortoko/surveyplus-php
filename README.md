@@ -10,13 +10,15 @@ https://www.codingtag.com/htaccess-deny-direct-access-to-folder-in-website
 
 htaccess files (or "distributed configuration files") provide a way to make configuration changes on a per-directory basis. A file, containing one or more configuration directives, is placed in a particular document directory, and the directives apply to that directory, and all subdirectories thereof.
 
+✔️
+
 
 ## Options to Implement
 
 
     2.2.1 Survey Creator
     The application shall allow Survey creators to:
-    • [REQ-SC-1] Create a survey
+    • [REQ-SC-1] Create a survey ✔️
     • [REQ-SC-2] Update a survey that is unpublished
     • [REQ-SC-3] Delete a survey that is unpublished
     • [REQ-SC-4] Add questions to a survey

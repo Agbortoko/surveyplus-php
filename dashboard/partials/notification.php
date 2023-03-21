@@ -9,6 +9,11 @@
             <?php if ($_GET['success'] == "loggedin") : ?>
                 <p class="mb-0 fs-3 fw-bold text-center">Welcome Back!</p>
             <?php endif ?>
+
+
+            <?php if ($_GET['success'] == "saved" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Survey Created Successfully</p>
+            <?php endif ?>
             
         </div>
     </div>
@@ -18,7 +23,7 @@
 
 
 <?php if (isset($_GET['error']) && !empty($_GET['error'])) : ?>
-    <div class="row">
+    <div class="row mt-3">
         <div class="alert alert-danger">
             <?php if ($_GET['error'] == "emptyfield") : ?>
                 <p class="mb-0 fs-5 fw-bold text-center">Please fill all required fields</p>

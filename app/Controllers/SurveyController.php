@@ -19,6 +19,16 @@ class SurveyController
         return $this->surveys->get();
     }
 
+    public function create(array $data)
+    {
+        if($this->surveys->save($data)){
+            return true;
+        }
+
+        return false;
+
+    }
+
 
 
 }

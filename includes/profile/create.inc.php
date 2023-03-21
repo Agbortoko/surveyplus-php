@@ -3,9 +3,10 @@
 require "../../vendor/autoload.php";
 
 use Surveyplus\App\Controllers\ProfileController;
+session_start();
 
 if (isset($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
-    session_start();
+   
 
     $first_name = clean_input($_POST['first_name']);
     $last_name = clean_input($_POST['last_name']);

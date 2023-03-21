@@ -50,33 +50,39 @@ $all_surveys = $surveys->show();
                         </div>
                     </div>
 
-              
-
+                
 
                     <div class="container p-0 mt-3">
 
 
-                        <form action="" method="POST">
+                        <form action="<?= DASHBOARD_URL . "/includes/survey/create.inc.php" ?>" method="POST">
 
 
                                <div class="form-group mb-4">
-                                    <label for="name" class="mb-2 fw-bold">Name</label>
-                                    <input type="text" class="form-control border border-1 border-primary rounded-0" placeholder="Type your Survey Name" name="name">
+                                    <label for="name" class="mb-2 fw-bold">Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control border border-1 border-primary rounded-0" placeholder="Type your Survey Name" name="name" required>
                                </div> 
 
 
                                <div class="form-group mb-4">
-                                    <label for="description" class="mb-2 fw-bold">Description</label>
-                                    <textarea class="form-control border border-1 border-primary rounded-0" style="resize:none" name="description"></textarea>
+                                    <label for="description" class="mb-2 fw-bold">Description <span class="text-danger">*</span></label>
+                                    <textarea class="form-control border border-1 border-primary rounded-0" style="resize:none" name="description" required></textarea>
                                </div> 
 
                                <div class="form-group mb-4">
-                                    <label for="visibility" class="mb-2 fw-bold">Visibility</label>
-                                    <select name="visibility" class="form-select border border-1 border-primary rounded-0">
-                                        <option value="1">Publish</option>
-                                        <option value="2">Draft</0option>
+                                    <label for="visibility" class="mb-2 fw-bold">Visibility <span class="text-danger">*</span></label>
+                                    <select name="visibility" class="form-select border border-1 border-primary rounded-0" required>
+                                        <option selected disabled>Select Survey Visibility</option>
+                                        <option value="1">Published</option>
+                                        <option value="0">Not Published</0option>
                                     </select>
                                </div> 
+
+
+                               <div class="form-group mb-4">
+                                <label for="expires_on" class="mb-2 fw-bold">Expiry Date <span class="text-danger">*</span></label>
+                                <input type="date" name="expires_on" id="expiresOn" min="" class="form-control border border-1 border-primary" required>
+                               </div>
 
                                <div class="form-group">
                                     <button type="submit" class="btn btn-primary rounded-0 w-100">Create Survey</button>
@@ -104,6 +110,8 @@ $all_surveys = $surveys->show();
 
 
     <?php require DASHBOARD_PATH . "/partials/footer.php" ?>
+
+
 
 </body>
 
