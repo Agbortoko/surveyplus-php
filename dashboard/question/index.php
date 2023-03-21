@@ -86,6 +86,7 @@ $all_surveys = $surveys->show();
                                         <td>Edinburgh</td>
                                         <td>61</td>
                                         <td>2011/04/25</td>
+                                        <td>2011/04/25</td>
                                     </tr>
 
 
