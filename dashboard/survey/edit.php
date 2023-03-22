@@ -25,7 +25,7 @@ if(isset($_GET["survey"]) && isset($_GET["action"]) && $_GET["action"] == "edit"
      }
      
 
-    $survey = $surveys->edit($survey_id);
+    $survey = $surveys->edit($survey_id, $_SESSION["user_id"]);
 }
 
 

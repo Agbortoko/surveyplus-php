@@ -75,6 +75,10 @@
                 <p class="mb-0 fs-3 fw-bold text-center">Question Not Saved!</p>
             <?php endif ?>
 
+            <?php if ($_GET['error'] == "updatenotallowed" && $_GET['type'] == "question") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">You cannot update the question a published survey!</p>
+            <?php endif ?>
+
         </div>
     </div>
 <?php endif ?>

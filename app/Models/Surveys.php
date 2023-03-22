@@ -14,12 +14,25 @@ final class Surveys extends BaseModel
      *
      * @param integer|null $survey_id
      * @param integer|null $user_id
+     * @param bool|null $published
+     * 
      * @return array
      */
-    public function get(int $survey_id = null, int $user_id = null) 
+    public function get(int $survey_id = null, int $user_id = null, bool $published = null) : array
     {
+        if(isset($published) && isset($user_id)){
+
+            $is_published = ($published == true) ? $published = 1 : $published = 0;
+            
+            $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id AND published = $is_published")->findAll();
+
+            return $surveys; // Return all surveys with user id and check for published state
+        }
+
+
         if($survey_id != null){
-            $surveys = $this->select("SELECT *  FROM $this->table WHERE id = $survey_id")->findAll();
+
+            $surveys = $this->select("SELECT * FROM $this->table WHERE id = $survey_id AND user_id = $user_id")->findAll();
 
             foreach($surveys as $survey){
                 return $survey; // Return single survey incase id paramater is set
@@ -28,11 +41,15 @@ final class Surveys extends BaseModel
 
 
         if($user_id != null){
-            $surveys = $this->select("SELECT *  FROM $this->table WHERE user_id = $user_id")->findAll();
+            $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id")->findAll();
             return $surveys; // Return all surveys with user id
         }
+        
 
-        $surveys = $this->select("SELECT *  FROM $this->table")->findAll();
+
+    
+
+        $surveys = $this->select("SELECT * FROM $this->table")->findAll();
         return $surveys;
     }
 

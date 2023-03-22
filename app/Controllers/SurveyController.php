@@ -25,9 +25,17 @@ class SurveyController extends BaseController
         return $this->surveys->get();
     }
 
-    public function show_user_survey(int $user_id) : array
+    /**
+     * Show Users for specific condition
+     *
+     * @param integer $user_id
+     * @param integer|null $published
+     * 
+     * @return array
+     */
+    public function show_user_survey(int $user_id, bool $published = null) : array
     {
-        return $this->surveys->get(null, $user_id);
+        return $this->surveys->get(null, $user_id, $published);
     }
 
 
@@ -43,9 +51,9 @@ class SurveyController extends BaseController
 
 
     // Get survey to modify
-    public function edit(int $survey_id)
+    public function edit(int $survey_id, int $user_id)
     {
-        $survey = $this->surveys->get($survey_id);
+        $survey = $this->surveys->get($survey_id, $user_id);
         
         return $survey;
     }

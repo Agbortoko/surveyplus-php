@@ -4,7 +4,7 @@ namespace Surveyplus\App\Controllers;
 
 use Surveyplus\App\Models\Questions;
 
-class QuestionController extends BaseController
+class QuestionController 
 {
     public Questions $questions;
 
@@ -19,16 +19,16 @@ class QuestionController extends BaseController
      * @param integer $question_id
      * @return array A question qith id question_id
      */
-    public function show(int $question_id): array
+    public function show(int $question_id, int $user_id): array
     {
-        return $this->questions->get($question_id);
+        return $this->questions->get($question_id, $user_id);
     }
 
 
 
-    public function show_all(): array
+    public function show_all(int $user_id): array
     {
-        return $this->questions->get();
+        return $this->questions->get(null, $user_id);
     }
 
 

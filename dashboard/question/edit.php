@@ -2,8 +2,9 @@
 
 use Surveyplus\App\Controllers\SurveyController;
 use Surveyplus\App\Controllers\AnswerCategoryController;
+use Surveyplus\App\Controllers\QuestionController;
 
-$pageTitle = "Add Questions"; ?>
+$pageTitle = "Edit Questions"; ?>
 
 <?php require "../../vendor/autoload.php"; ?>
 
@@ -11,14 +12,32 @@ $pageTitle = "Add Questions"; ?>
 
 <?php
 
-$user_id = $_SESSION["user_id"];
 
-$surveys = new SurveyController();
-$answer_categories = new AnswerCategoryController();
+if(isset($_GET["question"]) && isset($_GET["action"]) && $_GET["action"] == "edit"){
 
-$all_surveys = $surveys->show_user_survey($user_id);
+    $question_id = $_GET["question"];
+    $user_id = $_SESSION["user_id"];
 
-$all_answer_categories = $answer_categories->show_all();
+    $surveys = new SurveyController();
+    $answer_categories = new AnswerCategoryController();
+    $questions = new QuestionController();
+
+    $all_surveys = $surveys->show_user_survey($user_id, false);
+
+    // print_r($all_surveys);
+
+    $all_answer_categories = $answer_categories->show_all();
+
+
+    $question = $questions->show($question_id, $user_id);
+
+    if($question["survey_published"] == 1)
+    {
+        header("Location:" . DASHBOARD_URL . "/question/index.php?type=question&error=updatenotallowed");
+        exit(0);
+    }
+
+}
 
 ?>
 
@@ -42,7 +61,7 @@ $all_answer_categories = $answer_categories->show_all();
 
                             <h1 class="mt-4"><?= $pageTitle ?></h1>
                             <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item active">Add a questions to your survey</li>
+                                <li class="breadcrumb-item active">Modify questions</li>
                             </ol>
 
                         </div>
@@ -62,12 +81,12 @@ $all_answer_categories = $answer_categories->show_all();
                     <div class="container p-0 mt-3">
 
 
-                        <form action="<?= DASHBOARD_URL . "/includes/question/create.inc.php" ?>" method="POST">
+                        <form action="<?= DASHBOARD_URL . "/includes/question/update.inc.php" ?>" method="POST">
 
 
                                <div class="form-group mb-4">
                                     <label for="name" class="mb-2 fw-bold">Name</label>
-                                    <input type="text" class="form-control border border-1 border-primary rounded-0" placeholder="Type your Questions Title" name="name">
+                                    <input type="text" class="form-control border border-1 border-primary rounded-0" placeholder="Type your Questions Title" value="<?= $question["name"] ?>" name="name">
                                </div> 
 
                                <div class="form-group mb-4">
@@ -75,7 +94,9 @@ $all_answer_categories = $answer_categories->show_all();
                                     <select name="survey" class="form-select border border-1 border-primary rounded-0">
                                     <?php if(isset($all_surveys) && !empty($all_surveys)): ?>
                                         <?php foreach($all_surveys as $survey): ?>
-                                            <option value="<?= $survey["id"] ?>">
+
+                                            <?php if($survey["id"] == $question["survey_id"]): ?>
+                                            <option value="<?= $survey["id"] ?>" selected>
                                                 <?= $survey["name"] ?>
                                                 <?php if($survey["published"] == 1): ?> 
                                                     <span>->Published</span>
@@ -83,6 +104,20 @@ $all_answer_categories = $answer_categories->show_all();
                                                     <span>->Not Published</span>
                                                 <?php endif ?>
                                             </option>
+
+                                            <?php else: ?>
+
+                                                <option value="<?= $survey["id"] ?>">
+                                                    <?= $survey["name"] ?>
+                                                    <?php if($survey["published"] == 1): ?> 
+                                                        <span>->Published</span>
+                                                    <?php else: ?>
+                                                        <span>->Not Published</span>
+                                                    <?php endif ?>
+                                                 </option>
+
+                                            <?php endif ?>
+
                                         <?php endforeach ?>
                                     <?php else: ?>
                                         <option selected disabled>No Answer Category Found</option>
@@ -96,7 +131,16 @@ $all_answer_categories = $answer_categories->show_all();
                                     <select name="answer_category" class="form-select border border-1 border-primary rounded-0">
                                         <?php if(isset($all_answer_categories) && !empty($all_answer_categories)): ?>
                                             <?php foreach($all_answer_categories as $answer_category): ?>
-                                                <option value="<?= $answer_category["id"] ?>"><?= ucwords($answer_category["name"]) ?></option>
+
+                                                <?php if($answer_category["id"] == $question["answer_type_id"]): ?>
+
+                                                    <option value="<?= $answer_category["id"] ?>" selected><?= ucwords($answer_category["name"]) ?></option>
+
+                                                <?php else: ?>
+
+                                                    <option value="<?= $answer_category["id"] ?>"><?= ucwords($answer_category["name"]) ?></option>
+                                                
+                                                <?php endif ?>
                                                 
                                             <?php endforeach ?>
                                         <?php else: ?>
@@ -106,7 +150,7 @@ $all_answer_categories = $answer_categories->show_all();
                                </div> 
 
                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary rounded-0 w-100">Add Question to Survey</button>
+                                    <button type="submit" class="btn btn-primary rounded-0 w-100">Update Survey Question</button>
                                </div>
 
 

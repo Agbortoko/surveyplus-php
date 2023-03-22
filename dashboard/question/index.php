@@ -93,7 +93,7 @@ $all_questions = $questions->show_survey_question($_SESSION["user_id"]);
                                                     <?php if ($questions["survey_published"] != 1) : ?>
 
                                                         <div class="d-block p-0">
-                                                            <a href="<?= DASHBOARD_URL . '/survey/edit.php?question=' . $questions['id'] . '&action=edit' ?>">Edit Question</a>
+                                                            <a href="<?= DASHBOARD_URL . '/question/edit.php?question=' . $questions['id'] . '&action=edit' ?>">Edit Question</a>
                                                         </div>
 
                                                     <?php endif ?>
