@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2023 at 03:02 PM
+-- Generation Time: Mar 22, 2023 at 07:32 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -116,6 +116,15 @@ CREATE TABLE `question` (
   `answer_category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `question`
+--
+
+INSERT INTO `question` (`id`, `name`, `survey_id`, `createdOn`, `answer_category_id`) VALUES
+(1, 'What is your name?', 6, '2023-03-22 02:45:24', 3),
+(2, 'Do you like animations on videos', 1, '2023-03-22 03:55:51', 2),
+(3, 'Do you love online websites that sell product', 5, '2023-03-22 04:10:40', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -152,6 +161,16 @@ CREATE TABLE `survey` (
   `expiresOn` date DEFAULT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `survey`
+--
+
+INSERT INTO `survey` (`id`, `updatedOn`, `name`, `description`, `published`, `createdOn`, `publishedOn`, `expiresOn`, `user_id`) VALUES
+(1, NULL, 'What type of YouTube videos do you like', 'This survey is to get information about what ', 1, '2023-03-21 14:04:28', '2023-03-21 15:04:28', '2023-03-31', 1),
+(5, NULL, 'Ecommerce', 'This is a short description just to test how ', 0, '2023-03-21 20:15:55', NULL, '2023-03-24', 1),
+(6, NULL, 'Another interesting Survey', 'This is to check out how it works', 1, '2023-03-21 20:19:31', '2023-03-21 21:19:31', '2023-03-23', 1),
+(7, NULL, 'Just a Survey and other', 'This is a type of survey just for a test', 0, '2023-03-22 01:24:26', NULL, '2023-03-24', 1);
 
 -- --------------------------------------------------------
 
@@ -313,7 +332,7 @@ ALTER TABLE `profile`
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -325,7 +344,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `survey_taker`
