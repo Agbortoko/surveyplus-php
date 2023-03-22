@@ -1,6 +1,7 @@
 <?php
 
 use Surveyplus\App\Controllers\SurveyController;
+use Surveyplus\App\Controllers\AnswerCategoryController;
 
 $pageTitle = "Add Questions"; ?>
 
@@ -10,9 +11,13 @@ $pageTitle = "Add Questions"; ?>
 
 <?php
 
-$surveys = new SurveyController();
+$user_id = $_SESSION["user_id"];
 
-$all_surveys = $surveys->show();
+$surveys = new SurveyController();
+$answer_categories = new AnswerCategoryController();
+
+$all_surveys = $surveys->show_user_survey($user_id);
+$all_answer_categories = $answer_categories->show_all();
 
 ?>
 
@@ -56,40 +61,50 @@ $all_surveys = $surveys->show();
                     <div class="container p-0 mt-3">
 
 
-                        <form action="" method="POST">
+                        <form action="<?= DASHBOARD_URL . "/includes/question/create.inc.php" ?>" method="POST">
 
 
                                <div class="form-group mb-4">
                                     <label for="name" class="mb-2 fw-bold">Name</label>
-                                    <input type="text" class="form-control border border-1 border-primary rounded-0" placeholder="Type your Survey Name" name="name">
+                                    <input type="text" class="form-control border border-1 border-primary rounded-0" placeholder="Type your Questions Title" name="name">
+                               </div> 
+
+                               <div class="form-group mb-4">
+                                    <label for="survey" class="mb-2 fw-bold">Survey</label>
+                                    <select name="survey" class="form-select border border-1 border-primary rounded-0">
+                                    <?php if(isset($all_surveys) && !empty($all_surveys)): ?>
+                                        <?php foreach($all_surveys as $survey): ?>
+                                            <option value="<?= $survey["id"] ?>"><?= $survey["name"] ?></option>
+                                        <?php endforeach ?>
+                                    <?php else: ?>
+                                        <option selected disabled>No Answer Category Found</option>
+                                    <?php endif ?>
+                                    </select>
                                </div> 
 
 
                                <div class="form-group mb-4">
-                                    <label for="description" class="mb-2 fw-bold">Description</label>
-                                    <textarea class="form-control border border-1 border-primary rounded-0" style="resize:none" name="description"></textarea>
-                               </div> 
-
-                               <div class="form-group mb-4">
-                                    <label for="visibility" class="mb-2 fw-bold">Visibility</label>
-                                    <select name="visibility" class="form-select border border-1 border-primary rounded-0">
-                                        <option value="1">Publish</option>
-                                        <option value="2">Draft</0option>
+                                    <label for="answer_category" class="mb-2 fw-bold">Answer Type</label>
+                                    <select name="answer_category" class="form-select border border-1 border-primary rounded-0">
+                                        <?php if(isset($all_answer_categories) && !empty($all_answer_categories)): ?>
+                                            <?php foreach($all_answer_categories as $answer_category): ?>
+                                                <option value="<?= $answer_category["id"] ?>"><?= ucwords($answer_category["name"]) ?></option>
+                                                
+                                            <?php endforeach ?>
+                                        <?php else: ?>
+                                            <option selected disabled>No Answer Category Found</option>
+                                        <?php endif ?>
                                     </select>
                                </div> 
 
                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary rounded-0 w-100">Create Survey</button>
+                                    <button type="submit" class="btn btn-primary rounded-0 w-100">Add Question to Survey</button>
                                </div>
 
 
                         </form>
 
-
-
                     </div>
-
-
 
 
                 </div>

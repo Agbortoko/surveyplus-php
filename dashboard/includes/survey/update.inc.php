@@ -23,6 +23,15 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
 
     $survey_id = $_POST["survey_id"];
 
+
+    // Check if survey you want to update is already published
+    $is_published = $surveys->is_published($survey_id);
+
+    if($is_published){
+        header("Location:" . DASHBOARD_URL . "/survey/index.php?type=survey&error=updatenotallowed");
+        exit(0);
+    }
+
     // Check for empty fields
     if(empty($name) || empty($description) || empty($expires_on))
     {
@@ -30,13 +39,6 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
         exit(0);
     }
 
-
-    $active_profiles = $profiles->all_active_profiles($user_id);
-
-    foreach($active_profiles as $active_profile)
-    {
-        $profile_id = $active_profile["id"];
-    }
 
 
     $updated_on = date("Y-m-d H:i:s");
@@ -61,8 +63,11 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
         "published" => $visbility,
         "publishedOn" => $published_date,
         "expiresOn" => $expires_on,
-        "user_id" => $profile_id
+        "user_id" => $user_id
     ];
+
+ 
+
 
     $update = $surveys->modify($data, $survey_id);
 

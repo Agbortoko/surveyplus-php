@@ -12,7 +12,7 @@ $pageTitle = "All Surveys"; ?>
 
 $surveys = new SurveyController();
 
-$all_surveys = $surveys->show();
+$all_surveys = $surveys->show_user_survey($_SESSION["user_id"]);
 
 ?>
 

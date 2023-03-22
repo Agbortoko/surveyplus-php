@@ -16,6 +16,15 @@ if(isset($_GET["survey"]) && isset($_GET["action"]) && $_GET["action"] == "edit"
 
     $surveys = new SurveyController();
 
+     // Check if survey you want to update is already published
+     $is_published = $surveys->is_published($survey_id);
+
+     if($is_published){
+         header("Location:" . DASHBOARD_URL . "/survey/index.php?type=survey&error=updatenotallowed");
+         exit(0);
+     }
+     
+
     $survey = $surveys->edit($survey_id);
 }
 

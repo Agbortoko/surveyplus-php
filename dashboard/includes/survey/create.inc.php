@@ -39,13 +39,6 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
     }
 
 
-    $active_profiles = $profiles->all_active_profiles($user_id);
-
-    foreach($active_profiles as $active_profile)
-    {
-        $profile_id = $active_profile["id"];
-    }
-
 
     $data = [
         "name" => $name,
@@ -53,7 +46,7 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
         "published" => $visbility,
         "publishedOn" => $published_date,
         "expiresOn" => $expires_on,
-        "user_id" => $profile_id
+        "user_id" => $user_id
     ];
 
 

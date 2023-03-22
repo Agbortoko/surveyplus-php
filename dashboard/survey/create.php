@@ -8,13 +8,6 @@ $pageTitle = "Add Survey"; ?>
 
 <?php require DASHBOARD_PATH . "/partials/header.php" ?>
 
-<?php
-
-$surveys = new SurveyController();
-
-$all_surveys = $surveys->show();
-
-?>
 
 <body class="sb-nav-fixed">
 

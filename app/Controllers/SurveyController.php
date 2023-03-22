@@ -4,7 +4,7 @@ namespace Surveyplus\App\Controllers;
 
 use Surveyplus\App\Models\Surveys;
 
-class SurveyController
+class SurveyController extends BaseController
 {
 
     public Surveys $surveys;
@@ -14,10 +14,22 @@ class SurveyController
         $this->surveys = new Surveys();
     }
 
-    public function show()
+    public function show(int $survey_id) : array
+    {
+        return $this->surveys->get($survey_id);
+    }
+
+
+    public function show_all(): array
     {
         return $this->surveys->get();
     }
+
+    public function show_user_survey(int $user_id) : array
+    {
+        return $this->surveys->get(null, $user_id);
+    }
+
 
     public function create(array $data)
     {

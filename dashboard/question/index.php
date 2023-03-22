@@ -1,6 +1,6 @@
 <?php
 
-use Surveyplus\App\Controllers\SurveyController;
+use Surveyplus\App\Controllers\QuestionController;
 
 $pageTitle = "All Questions"; ?>
 
@@ -10,9 +10,11 @@ $pageTitle = "All Questions"; ?>
 
 <?php
 
-$surveys = new SurveyController();
+$questions = new QuestionController();
 
-$all_surveys = $surveys->show();
+// Get all questions for user with session user_id
+
+$all_questions = $questions->show_survey_question($_SESSION["user_id"]);
 
 ?>
 
@@ -61,43 +63,49 @@ $all_surveys = $surveys->show();
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Description</th>
+                                        <th>Survey</th>
+                                        <th>Answer Type</th>
                                         <th>Created</th>
-                                        <th>Published</th>
-                                        <th>Expires</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Description</th>
+                                        <th>Survey</th>
+                                        <th>Answer Type</th>
                                         <th>Created</th>
-                                        <th>Published</th>
-                                        <th>Expires</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
 
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
+
+
+                                    <?php if (isset($all_questions) && !empty($all_questions)) : ?>
+                                        <?php foreach ($all_questions as $questions) : ?>
+
+
+                                            <tr>
+                                                <td><?= $questions["name"] ?></td>
+                                                <td><?= $questions["survey_name"] ?></td>
+                                                <td><?= ucwords($questions["answer_type"]) ?></td>
+                                                <td><?= $questions["createdOn"] ?></td>
+                                                <td>
+                                                    <a href="<?= DASHBOARD_URL . '/question/delete.php?question=' . $questions['id'] . '&action=delete' ?>" class="btn btn-danger btn-sm">Delete</a>
+                                                </td>
+                                            </tr>
+
+
+                                        <?php endforeach ?>
+                                    <?php endif ?>
+
 
 
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-
-
-
 
                 </div>
             </main>

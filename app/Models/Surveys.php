@@ -13,9 +13,10 @@ final class Surveys extends BaseModel
      * Get survey data
      *
      * @param integer|null $survey_id
+     * @param integer|null $user_id
      * @return array
      */
-    public function get(int $survey_id = null) 
+    public function get(int $survey_id = null, int $user_id = null) 
     {
         if($survey_id != null){
             $surveys = $this->select("SELECT *  FROM $this->table WHERE id = $survey_id")->findAll();
@@ -23,6 +24,12 @@ final class Surveys extends BaseModel
             foreach($surveys as $survey){
                 return $survey; // Return single survey incase id paramater is set
             }
+        }
+
+
+        if($user_id != null){
+            $surveys = $this->select("SELECT *  FROM $this->table WHERE user_id = $user_id")->findAll();
+            return $surveys; // Return all surveys with user id
         }
 
         $surveys = $this->select("SELECT *  FROM $this->table")->findAll();

@@ -23,6 +23,11 @@
             <?php if ($_GET['success'] == "deleted" && $_GET['type'] == "survey") : ?>
                 <p class="mb-0 fs-3 fw-bold text-center">Survey Deleted Successfully</p>
             <?php endif ?>
+
+            <?php if ($_GET['success'] == "saved" && $_GET['type'] == "question") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Question Created Successfully</p>
+            <?php endif ?>
+            
             
         </div>
     </div>
@@ -50,12 +55,24 @@
                 <p class="mb-0 fs-5 fw-bold text-center">Sorry! Username not available</p>
             <?php endif ?>
 
+            <?php if ($_GET['error'] == "updatenotallowed" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">You cannot update a published survey!</p>
+            <?php endif ?>
+
             <?php if ($_GET['error'] == "deletenotallowed" && $_GET['type'] == "survey") : ?>
                 <p class="mb-0 fs-3 fw-bold text-center">You cannot delete a published survey!</p>
             <?php endif ?>
 
+            <?php if ($_GET['error'] == "savefailed" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Survey Not Saved!</p>
+            <?php endif ?>
+
             <?php if ($_GET['error'] == "deletefailed" && $_GET['type'] == "survey") : ?>
                 <p class="mb-0 fs-3 fw-bold text-center">Survey Delete Failed!</p>
+            <?php endif ?>
+
+            <?php if ($_GET['error'] == "savefailed" && $_GET['type'] == "question") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Question Not Saved!</p>
             <?php endif ?>
 
         </div>
