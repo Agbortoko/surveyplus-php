@@ -74,7 +74,14 @@ $all_answer_categories = $answer_categories->show_all();
                                     <select name="survey" class="form-select border border-1 border-primary rounded-0">
                                     <?php if(isset($all_surveys) && !empty($all_surveys)): ?>
                                         <?php foreach($all_surveys as $survey): ?>
-                                            <option value="<?= $survey["id"] ?>"><?= $survey["name"] ?></option>
+                                            <option value="<?= $survey["id"] ?>">
+                                                <?= $survey["name"] ?>
+                                                <?php if($survey["published"] == 1): ?> 
+                                                    <span>->Published</span>
+                                                <?php else: ?>
+                                                    <span>->Not Published</span>
+                                                <?php endif ?>
+                                            </option>
                                         <?php endforeach ?>
                                     <?php else: ?>
                                         <option selected disabled>No Answer Category Found</option>

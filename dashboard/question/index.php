@@ -87,8 +87,26 @@ $all_questions = $questions->show_survey_question($_SESSION["user_id"]);
 
 
                                             <tr>
-                                                <td><?= $questions["name"] ?></td>
-                                                <td><?= $questions["survey_name"] ?></td>
+                                                <td>
+                                                    <?= $questions["name"] ?>
+
+                                                    <?php if ($questions["survey_published"] != 1) : ?>
+
+                                                        <div class="d-block p-0">
+                                                            <a href="<?= DASHBOARD_URL . '/survey/edit.php?question=' . $questions['id'] . '&action=edit' ?>">Edit Question</a>
+                                                        </div>
+
+                                                    <?php endif ?>
+
+                                                </td>
+                                                <td>
+                                                    <a href="<?= DASHBOARD_URL . "/survey/" ?>"><?= $questions["survey_name"] ?></a> 
+                                                    <?php if($questions["survey_published"] == 1): ?>
+                                                        <span class="badge bg-primary">Published</span>
+                                                    <?php else: ?>
+                                                        <span class="badge bg-secondary">Not Published</span>
+                                                    <?php endif ?>
+                                                </td>
                                                 <td><?= ucwords($questions["answer_type"]) ?></td>
                                                 <td><?= $questions["createdOn"] ?></td>
                                                 <td>

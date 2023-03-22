@@ -21,7 +21,7 @@ htaccess files (or "distributed configuration files") provide a way to make conf
     • [REQ-SC-1] Create a survey ✔️
     • [REQ-SC-2] Update a survey that is unpublished ✔️
     • [REQ-SC-3] Delete a survey that is unpublished ✔️
-    • [REQ-SC-4] Add questions to a survey
+    • [REQ-SC-4] Add questions to a survey ✔️
     • [REQ-SC-5] Edit questions to a survey that is not yet published
     • [REQ-SC-6] Delete questions in a survey that is not yet published
     • [REQ-SC-7] Publish a survey ✔️
