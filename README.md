@@ -45,3 +45,10 @@ htaccess files (or "distributed configuration files") provide a way to make conf
     • [REQ-AQ-2] Create a survey Question Answer as multiple choice (checkbox)
     • [REQ-AQ-3] Create a survey Question with description and/or images and assign answer
     • [REQ-AQ-4] Show the corrected answers at the end of the assignment
+
+
+
+## Issue noticed
+
+Survey table user_id does not reference id in user table but id of the user profile ❌
+Changed survey user_id field name to profile_id ✔️

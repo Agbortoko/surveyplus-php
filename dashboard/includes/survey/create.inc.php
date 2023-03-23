@@ -3,6 +3,7 @@
 require "../../../vendor/autoload.php";
 
 use Surveyplus\App\Controllers\SurveyController;
+use Surveyplus\App\Controllers\ProfileController;
 
 session_start();
 
@@ -12,6 +13,7 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
     // debug_array($_POST);
     
     $surveys = new SurveyController();
+    $profiles = new ProfileController();
 
     $name = isset($_POST['name']) ? clean_input($_POST['name']) : "";
     $description = isset($_POST['description']) ? clean_input($_POST['description']) : "";
@@ -20,6 +22,8 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
     
     $user_id = $_SESSION["user_id"];
 
+    $profile = $profiles->all_active_profiles($user_id);
+
     // Check for empty fields
     if(empty($name) || empty($description) || empty($expires_on))
     {
@@ -27,9 +31,6 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
         exit(0);
     }
 
-
-    // echo $user_id;
-    // exit(0);
 
     // Check if published set date to now
 
@@ -41,6 +42,10 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
         $published_date = NULL;
     }
 
+    // debug_array($profile);
+
+    $profile_id = $profile["id"];
+
 
 
     $data = [
@@ -49,8 +54,11 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
         "published" => $visbility,
         "publishedOn" => $published_date,
         "expiresOn" => $expires_on,
-        "user_id" => $user_id
+        "profile_id" => $profile_id
     ];
+
+
+    // debug_array($data);
 
 
     $save = $surveys->create($data);

@@ -9,7 +9,12 @@
     }
 ?>
 
+<?php 
+require "vendor/autoload.php";
+session_start();
 
+    debug_array($_SESSION);
+?>
 <!DOCTYPE html>
 <html lang="en">
 

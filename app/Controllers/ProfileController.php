@@ -58,8 +58,12 @@ class ProfileController
     public function all_active_profiles(int $user_id) : array
     {
         $profiles = $this->profiles->find($user_id, 1);
-        
-        return $profiles;
+
+        foreach($profiles as $profile){
+            return $profile;
+        }
+
+      return false;
     }
 
 }

@@ -25,11 +25,11 @@ class Profiles extends BaseModel
      *
      * @param integer $userId
      * @param integer $state 1 for active and 0 for inactive
-     * @return array An array of profiles found
+     * @return array An array of profiles
      */
     public function find(int $userId, int $state)
     {
-        $profiles = $this->select("SELECT * FROM $this->table WHERE user_id = $userId AND isActive = $state ORDER BY id DESC")->findAll();
+        $profiles = $this->select("SELECT * FROM $this->table WHERE user_id = $userId AND isActive = $state")->findAll();
         return $profiles;
     }
 

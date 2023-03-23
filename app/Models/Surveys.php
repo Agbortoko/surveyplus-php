@@ -62,7 +62,7 @@ final class Surveys extends BaseModel
     public function save(array $data)
     {
         
-        $this->stmt = $this->conn->prepare("INSERT INTO $this->table (name, description, published, publishedOn, expiresOn, user_id) VALUES (:name, :description, :published, :publishedOn, :expiresOn, :user_id)");
+        $this->stmt = $this->conn->prepare("INSERT INTO $this->table (name, description, published, publishedOn, expiresOn, profile_id) VALUES (:name, :description, :published, :publishedOn, :expiresOn, :profile_id)");
 
         // Bind parameters to prepared indicators
         $this->stmt->bindParam(":name", $data["name"]);
@@ -70,7 +70,7 @@ final class Surveys extends BaseModel
         $this->stmt->bindParam(":published", $data["published"]);
         $this->stmt->bindParam(":publishedOn", $data["publishedOn"]);
         $this->stmt->bindParam(":expiresOn", $data["expiresOn"]);
-        $this->stmt->bindParam(":user_id", $data["user_id"]);
+        $this->stmt->bindParam(":profile_id", $data["profile_id"]);
 
         if(!$this->stmt->execute())
         {

@@ -25,7 +25,7 @@ class UserController
     public function create(array $data)
     {
         // Only save if email count in db is 0
-        if (count($this->users->find($data['email'])) == 0) {
+        if (count($this->users->find_all($data['email'])) == 0) {
 
             $this->users->save($data);
             return true;
@@ -37,21 +37,22 @@ class UserController
 
     public function auth(string $email, string $password)
     {
-        $users = $this->users->find($email);
+        $users = $this->users->find_all($email);
 
 
 
-        if (count($users) == 0) {
-            return false;
-        }
+            if (count($users) == 0) {
+                return false;
+            }
 
-
-        foreach ($users as $user) {
+            $user = $this->users->find($email);
+       
             $dbUserId = $user['id'];
             $dbEmail = $user['email'];
             $dbPassword = $user['password'];
             $isAdmin = $user['isAdmin'];
-        }
+            
+        
 
         $verifyPassword = password_verify($password, $dbPassword);
 

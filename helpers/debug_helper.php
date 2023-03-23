@@ -12,4 +12,6 @@ function debug_array(array $arrayToDebug)
     echo "<pre> <code>";
     print_r($arrayToDebug);
     echo "</pre> </code>";
+
+    exit(0); // stops the script from loading below
 }

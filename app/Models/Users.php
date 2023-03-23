@@ -31,9 +31,42 @@ final class Users extends BaseModel
         $this->stmt->execute();
     }
 
-    /** Verify if user with email already exist in database */
-    public function find(string $email){
-        $users = $this->select("SELECT * FROM $this->table WHERE email = '$email' ORDER BY id DESC")->findAll();
+
+   /**
+    * Get all users or user with an email
+    *
+    * @param string|null $email
+    * @return mixed
+    */
+    public function find(string $email = null) : mixed
+    {
+        
+        if(isset($email))
+        {
+            $users = $this->select("SELECT * FROM $this->table WHERE email = '$email'")->findAll();
+
+            foreach($users as $user)
+            {
+                return $user;
+            }
+        }
+        else{
+
+            $users = $this->select("SELECT * FROM $this->table ORDER BY id DESC'")->findAll();
+            return $users;
+
+        }
+
+
+        return false;
+
+    }
+
+
+
+    public function find_all(string $email)
+    {
+        $users = $this->select("SELECT * FROM $this->table WHERE email = '$email'")->findAll();
         return $users;
     }
 
