@@ -183,7 +183,7 @@ use Surveyplus\App\Controllers\SurveyController;
                                                 </td>
                                                 <td><?= $survey["expiresOn"] ?></td>
                                                 <td>
-                                                    <a class="btn btn-warning" href="<?= survey($_SESSION["handle"], $survey["id"], $survey["name"]); ?>" target="_b
+                                                    <a class="btn btn-warning btn-sm" href="<?= survey($_SESSION["handle"], $survey["id"], $survey["name"]); ?>" target="_b
                                                     ">Link</a>
                                                 </td>
                                                 

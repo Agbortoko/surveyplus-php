@@ -74,7 +74,7 @@ if(!function_exists("survey"))
      */
     function survey(string $handle, int $survey_id, string $name) : string
     {
-        return base_url("survey.php?h=".$handle."&id=".$survey_id."&t=".strtolower(str_replace(" ", "-", $name)));
+        return base_url("survey.php?handle=".$handle."&id=".$survey_id."&slug=".strtolower(str_replace(" ", "-", $name)));
 
     }
 }
