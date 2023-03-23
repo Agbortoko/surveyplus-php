@@ -27,6 +27,10 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
         exit(0);
     }
 
+
+    // echo $user_id;
+    // exit(0);
+
     // Check if published set date to now
 
     if($visbility == 1)
