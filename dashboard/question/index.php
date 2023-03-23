@@ -1,5 +1,6 @@
 <?php
 
+use Surveyplus\App\Controllers\ProfileController;
 use Surveyplus\App\Controllers\QuestionController;
 
 $pageTitle = "All Questions"; ?>
@@ -12,9 +13,13 @@ $pageTitle = "All Questions"; ?>
 
 $questions = new QuestionController();
 
-// Get all questions for user with session user_id
+// Get all questions for user with profile id
 
-$all_questions = $questions->show_survey_question($_SESSION["user_id"]);
+$profiles =  new ProfileController();
+
+$profile = $profiles->all_active_profiles($_SESSION["user_id"]);
+
+$all_questions = $questions->show_survey_question($profile["id"]);
 
 ?>
 

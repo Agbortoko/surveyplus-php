@@ -37,21 +37,25 @@ class UserController
 
     public function auth(string $email, string $password)
     {
-        $users = $this->users->find_all($email);
+            $users = $this->users->find_all($email);
 
 
+           // debug_array($users);
 
             if (count($users) == 0) {
                 return false;
             }
 
-            $user = $this->users->find($email);
+            foreach($users as $user)
+            {
+                
+                $dbUserId = $user['id'];
+                $dbEmail = $user['email'];
+                $dbPassword = $user['password'];
+                $isAdmin = $user['isAdmin'];
+                
+            }
        
-            $dbUserId = $user['id'];
-            $dbEmail = $user['email'];
-            $dbPassword = $user['password'];
-            $isAdmin = $user['isAdmin'];
-            
         
 
         $verifyPassword = password_verify($password, $dbPassword);

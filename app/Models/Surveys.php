@@ -19,7 +19,7 @@ final class Surveys extends BaseModel
      * 
      * @return array
      */
-    public function get(int $survey_id = null, int $user_id = null, bool $published = null, int $limit = null) : array
+    public function get(int $survey_id = null, int $profile_id = null, bool $published = null, int $limit = null) : array
     {
         if(isset($published) && isset($user_id)){
 
@@ -33,21 +33,21 @@ final class Surveys extends BaseModel
 
         if($survey_id != null){
 
-            $surveys = $this->select("SELECT * FROM $this->table WHERE id = $survey_id AND user_id = $user_id ORDER BY id DESC")->findAll();
+            $surveys = $this->select("SELECT * FROM $this->table WHERE id = $survey_id AND profile_id = $profile_id ORDER BY id DESC")->findAll();
 
             foreach($surveys as $survey){
                 return $survey; // Return single survey incase id paramater is set
             }
         }
 
-        if($user_id != null && $limit != null)
+        if($profile_id != null && $limit != null)
         {
-            $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id ORDER BY id DESC LIMIT $limit")->findAll();
+            $surveys = $this->select("SELECT * FROM $this->table WHERE profile_id = $profile_id ORDER BY id DESC LIMIT $limit")->findAll();
             return $surveys; // Return all surveys with user id limit 
         }
 
-        if($user_id != null){
-            $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id ORDER BY id DESC")->findAll();
+        if($profile_id != null){
+            $surveys = $this->select("SELECT * FROM $this->table WHERE profile_id = $profile_id ORDER BY id DESC")->findAll();
             return $surveys; // Return all surveys with user id
         }
 

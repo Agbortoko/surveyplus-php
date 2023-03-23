@@ -33,9 +33,9 @@ class SurveyController
      * 
      * @return array
      */
-    public function show_user_survey(int $user_id, bool $published = null) : array
+    public function show_user_survey(int $profile_id, bool $published = null) : array
     {
-        return $this->surveys->get(null, $user_id, $published);
+        return $this->surveys->get(null, $profile_id, $published);
     }
 
 
@@ -51,9 +51,9 @@ class SurveyController
 
 
     // Get survey to modify
-    public function edit(int $survey_id, int $user_id)
+    public function edit(int $survey_id, int $profile_id)
     {
-        $survey = $this->surveys->get($survey_id, $user_id);
+        $survey = $this->surveys->get($survey_id, $profile_id);
         
         return $survey;
     }

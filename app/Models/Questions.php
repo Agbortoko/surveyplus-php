@@ -9,7 +9,7 @@ final class Questions extends BaseModel
     public string $table = "question";
 
 
-    public function get(int $question_id = null, int $user_id = null) 
+    public function get(int $question_id = null, int $profile_id = null) 
     {
         if($question_id != null){
 
@@ -28,7 +28,7 @@ final class Questions extends BaseModel
                     ON q.survey_id = s.id 
                 JOIN answer_category ac 
                     ON q.answer_category_id = ac.id 
-                WHERE s.user_id = $user_id 
+                WHERE s.profile_id = $profile_id 
                     AND q.id = $question_id 
                 ORDER BY q.id DESC")->findAll();
 
@@ -39,9 +39,9 @@ final class Questions extends BaseModel
         
         }
 
-        if($user_id != null){
+        if($profile_id != null){
 
-             $questions = $this->join($user_id);
+             $questions = $this->join($profile_id);
              return $questions;
         
         }
@@ -79,7 +79,7 @@ final class Questions extends BaseModel
      * @param integer $user_id
      * @return array $questions
      */
-    public function join(int $user_id)
+    public function join(int $profile_id)
     {
         $questions = $this->select("SELECT 
                 q.id as id, 
@@ -94,7 +94,7 @@ final class Questions extends BaseModel
                 ON q.survey_id = s.id 
             JOIN answer_category ac 
                 ON q.answer_category_id = ac.id 
-            WHERE s.user_id = $user_id 
+            WHERE s.profile_id = $profile_id 
                 ORDER BY q.id DESC")->findAll();
 
             

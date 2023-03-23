@@ -19,22 +19,22 @@ class QuestionController
      * @param integer $question_id
      * @return array A question qith id question_id
      */
-    public function show(int $question_id, int $user_id): array
+    public function show(int $question_id, int $profile_id): array
     {
-        return $this->questions->get($question_id, $user_id);
+        return $this->questions->get($question_id, $profile_id);
     }
 
 
 
-    public function show_all(int $user_id): array
+    public function show_all(int $profile_id): array
     {
-        return $this->questions->get(null, $user_id);
+        return $this->questions->get(null, $profile_id);
     }
 
 
-    public function show_survey_question(int $user_id) : array
+    public function show_survey_question(int $profile_id) : array
     {
-        return $this->questions->join($user_id);
+        return $this->questions->join($profile_id);
     }
 
 

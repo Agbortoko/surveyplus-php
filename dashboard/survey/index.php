@@ -1,6 +1,7 @@
 <?php
 
 use Surveyplus\App\Controllers\SurveyController;
+use Surveyplus\App\Controllers\ProfileController;
 
 $pageTitle = "All Surveys"; ?>
 
@@ -11,7 +12,11 @@ $pageTitle = "All Surveys"; ?>
 <?php
 
     $surveys = new SurveyController();
-    $all_surveys = $surveys->show_user_survey($_SESSION["user_id"]);
+    $profiles =  new ProfileController();
+
+    $profile = $profiles->all_active_profiles($_SESSION["user_id"]);
+
+    $all_surveys = $surveys->show_user_survey($profile["id"]);
 
 ?>
 
