@@ -16,7 +16,7 @@ use Surveyplus\App\Controllers\SurveyController;
 
     $user_id = $_SESSION["user_id"];
 
-    $all_surveys = $surveys->show_all($user_id, 3);
+    $all_surveys = $surveys->show_all($user_id, 2);
     $number_of_surveys = count($surveys->show_all($user_id));
     $number_of_questions = count($questions->show_all($user_id));
     $number_of_answertypes = count($answer_types->show_all());
@@ -129,7 +129,7 @@ use Surveyplus\App\Controllers\SurveyController;
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Recently Added Surveys
+                            Recently Added Surveys <a href="<?= DASHBOARD_URL . "/survey/" ?>" class="btn btn-primary btn-sm ms-3">See More Surveys</a>
                         </div>
                         <div class="card-body">
                             
@@ -142,6 +142,7 @@ use Surveyplus\App\Controllers\SurveyController;
                                         <th>Updated</th>
                                         <th>Published</th>
                                         <th>Expires</th>
+                                        <th>Survey Link</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -152,6 +153,7 @@ use Surveyplus\App\Controllers\SurveyController;
                                         <th>Updated</th>
                                         <th>Published</th>
                                         <th>Expires</th>
+                                        <th>Survey Link</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -180,6 +182,10 @@ use Surveyplus\App\Controllers\SurveyController;
                                                     <?php endif ?>
                                                 </td>
                                                 <td><?= $survey["expiresOn"] ?></td>
+                                                <td>
+                                                    <a class="btn btn-warning" href="<?= survey($_SESSION["handle"], $survey["id"], $survey["name"]); ?>" target="_b
+                                                    ">Link</a>
+                                                </td>
                                                 
                                             </tr>
 

@@ -62,3 +62,20 @@ function url_is(string $link){
 
 
 
+if(!function_exists("survey"))
+{
+    /**
+     * Generate a survey link
+     *
+     * @param string $handle User handle
+     * @param integer $survey_id The Survey ID
+     * @param string $name  Survey Title
+     * @return string
+     */
+    function survey(string $handle, int $survey_id, string $name) : string
+    {
+        return base_url("survey.php?h=".$handle."&id=".$survey_id."&t=".strtolower(str_replace(" ", "-", $name)));
+
+    }
+}
+

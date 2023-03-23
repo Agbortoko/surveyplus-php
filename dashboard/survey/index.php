@@ -65,6 +65,7 @@ $pageTitle = "All Surveys"; ?>
                                         <th>Updated</th>
                                         <th>Published</th>
                                         <th>Expires</th>
+                                        <th>Link</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -76,6 +77,7 @@ $pageTitle = "All Surveys"; ?>
                                         <th>Updated</th>
                                         <th>Published</th>
                                         <th>Expires</th>
+                                        <th>Link</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -105,6 +107,11 @@ $pageTitle = "All Surveys"; ?>
                                                     <?php endif ?>
                                                 </td>
                                                 <td><?= $survey["expiresOn"] ?></td>
+                                                <td>
+                                                    <a class="btn btn-warning" href="<?= survey($_SESSION["handle"], $survey["id"], $survey["name"]); ?>" target="_b
+                                                    ">Link</a>
+                                                </td>
+
                                                 <td>
                                                     <?php if($survey["published"] != 1): ?>
                                                        <a href="<?= DASHBOARD_URL . '/survey/delete.php?survey=' . $survey['id'] . '&action=delete' ?>" class="btn btn-danger btn-sm">Delete</a>
