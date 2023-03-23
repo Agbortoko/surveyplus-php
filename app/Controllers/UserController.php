@@ -51,32 +51,31 @@ class UserController
             $dbEmail = $user['email'];
             $dbPassword = $user['password'];
             $isAdmin = $user['isAdmin'];
-
-
-
-            $verifyPassword = password_verify($password, $dbPassword);
-
-
-            if ($verifyPassword && ($dbEmail == $email)) {
-
-                session_start();
-                $_SESSION['user_id'] = $dbUserId;
-                $_SESSION['isAdmin'] = $isAdmin;
-
-                // Get users active profile data
-                $profiles = $this->profiles->find($dbUserId, 1);
-
-                // Add info to session
-                foreach ($profiles as $profile) {
-                    $_SESSION['full_name'] = $profile["first_name"] . " " . $profile["last_name"];
-                    $_SESSION["handle"] = $profile["handle"];
-                }
-
-                return true;
-            }
         }
 
-        
+        $verifyPassword = password_verify($password, $dbPassword);
+
+
+        if ($verifyPassword && ($dbEmail == $email)) {
+
+            session_start();
+            $_SESSION['user_id'] = $dbUserId;
+            $_SESSION['isAdmin'] = $isAdmin;
+
+            // Get users active profile data
+            $profiles = $this->profiles->find($dbUserId, 1);
+
+            // Add info to session
+            foreach ($profiles as $profile) {
+                $_SESSION['full_name'] = $profile["first_name"] . " " . $profile["last_name"];
+                $_SESSION["handle"] = $profile["handle"];
+            }
+
+            return true;
+        }
+
+
+
         return false;
 
         // debug_array($user);    
