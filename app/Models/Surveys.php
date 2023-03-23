@@ -47,8 +47,6 @@ final class Surveys extends BaseModel
         
 
 
-    
-
         $surveys = $this->select("SELECT * FROM $this->table ORDER BY id DESC")->findAll();
         return $surveys;
     }

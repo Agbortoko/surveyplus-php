@@ -17,6 +17,10 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
     $answer_category_id = isset($_POST['answer_category']) ? clean_input($_POST['answer_category']) : null;
 
     $question_id = $_POST["question_id"];
+    $user_id = $_SESSION["user_id"];
+
+    $multi_choice = isset($_POST["multi_choice"]) ? $_POST["multi_choice"] : null;
+    $one_choice = isset($_POST["one_choice"]) ? $_POST["one_choice"] : null;
 
 
     // Check for empty fields
@@ -27,7 +31,7 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
     }
 
 
-    $survey = $surveys->show($survey_id);
+    $survey = $surveys->show($survey_id, $user_id);
 
     if($survey["published"] == 1)
     {
@@ -43,6 +47,21 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
     ];
 
 
+    // Check answer type and place description if needed
+
+    if($answer_category_id == 1)
+    {
+        $data["description"] = json_encode($one_choice);
+    }
+    else if($answer_category_id == 2)
+    {
+        $data["description"] = json_encode($multi_choice);
+    }else
+    {
+        $data["description"] = NULL;
+    }
+
+
 
 
     $is_published = $surveys->is_published($survey_id);
@@ -50,6 +69,15 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
     if($is_published){
         header("Location:" . DASHBOARD_URL . "/question/index.php?type=question&error=updatenotallowed");
         exit(0);
+    }
+
+
+    $update = $questions->modify($data, $question_id);
+
+
+    if(!$update){
+        header("Location:" . DASHBOARD_URL . "/question/index.php?type=question&error=updatedfailed");
+        exit(0); 
     }
 
     header("Location:" . DASHBOARD_URL . "/question/index.php?type=question&success=updated");

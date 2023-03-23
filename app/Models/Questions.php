@@ -16,6 +16,7 @@ final class Questions extends BaseModel
                 $questions = $this->select("SELECT 
                     q.id as id, 
                     q.name as name, 
+                    q.description as description,
                     q.createdOn as createdOn, 
                     s.id as survey_id, 
                     s.name as survey_name, 
@@ -27,7 +28,9 @@ final class Questions extends BaseModel
                     ON q.survey_id = s.id 
                 JOIN answer_category ac 
                     ON q.answer_category_id = ac.id 
-                WHERE s.user_id = $user_id AND q.id = $question_id ORDER BY q.id DESC")->findAll();
+                WHERE s.user_id = $user_id 
+                    AND q.id = $question_id 
+                ORDER BY q.id DESC")->findAll();
 
 
             foreach($questions as $question ){
@@ -91,7 +94,8 @@ final class Questions extends BaseModel
                 ON q.survey_id = s.id 
             JOIN answer_category ac 
                 ON q.answer_category_id = ac.id 
-            WHERE s.user_id = $user_id ORDER BY q.id DESC")->findAll();
+            WHERE s.user_id = $user_id 
+                ORDER BY q.id DESC")->findAll();
 
             
 
@@ -105,8 +109,9 @@ final class Questions extends BaseModel
 
         $name = $data["name"];
         $answer_category_id = $data["answer_category_id"];
+        $description = $data["description"];
 
-        $this->stmt = $this->conn->prepare("UPDATE $this->table SET name = '$name', answer_category_id = '$answer_category_id' WHERE id = $question_id");
+        $this->stmt = $this->conn->prepare("UPDATE $this->table SET name = '$name', description = '$description' , answer_category_id = '$answer_category_id' WHERE id = $question_id");
 
 
         if(!$this->stmt->execute())

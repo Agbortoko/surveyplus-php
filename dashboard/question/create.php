@@ -94,9 +94,9 @@ $all_answer_categories = $answer_categories->show_all();
                             <div class="form-group mb-4">
                                 <label for="answer_category" class="mb-2 fw-bold">Answer Type</label>
                                 <select onchange="questionItems()" name="answer_category" id="answer_category" class="form-select border border-1 border-primary rounded-0">
-                                        
+
                                     <option selected disabled>Select and Answer type</option>
-                                    
+
                                     <?php if (isset($all_answer_categories) && !empty($all_answer_categories)) : ?>
                                         <?php foreach ($all_answer_categories as $answer_category) : ?>
                                             <option value="<?= $answer_category["id"] ?>"><?= ucwords($answer_category["name"]) ?></option>
@@ -109,6 +109,7 @@ $all_answer_categories = $answer_categories->show_all();
                             </div>
 
 
+                            <!-- Question description -->
 
                             <div class="container" id="question_items" style="padding: 1rem;">
 
@@ -164,9 +165,9 @@ $all_answer_categories = $answer_categories->show_all();
 
 
 
-    
 
-   
+
+
 
 
 
@@ -175,156 +176,153 @@ $all_answer_categories = $answer_categories->show_all();
 
 
     <script>
+        $(document).ready(function() {
 
 
-$(document).ready(function() {
+            $("#add_one_choice").click(() => {
 
-        
-        $("#add_one_choice").click(() => {
+                let fieldCount = 1;
+                let buttonCount = 1;
 
-            let fieldCount = 1;
-            let buttonCount = 1;
+                let div = document.createElement("div");
+                div.classList.add("one_choice_field", "input-group", "mb-3");
+                div.setAttribute("id", "one_choice_field_" + fieldCount++);
 
-            let div = document.createElement("div");
-            div.classList.add("one_choice_field", "input-group" , "mb-3");
-            div.setAttribute("id", "one_choice_field_" + fieldCount++);
+                let radio = document.createElement("input");
+                radio.type = "radio";
+                radio.classList.add("me-3");
+                radio.setAttribute("disabled", "disabled");
 
-            let radio = document.createElement("input");
-            radio.type = "radio";
-            radio.classList.add("me-3");
-            radio.setAttribute("disabled", "disabled");
+                let delButton = document.createElement("button");
+                delButton.setAttribute("type", "button");
+                delButton.classList.add("delete_one_choice", "btn", "btn-danger");
+                delButton.setAttribute("id", "delete_one_choice_" + buttonCount++);
+                delButton.textContent = "delete";
 
-            let delButton = document.createElement("button");
-            delButton.setAttribute("type", "button");
-            delButton.classList.add("delete_one_choice", "btn", "btn-danger");
-            delButton.setAttribute("id", "delete_one_choice_" + buttonCount++);
-            delButton.textContent = "delete";
+                let textInput = document.createElement("input");
+                textInput.type = "text";
+                textInput.classList.add("form-control", "border", "border-1", "border-primary", "rounded-0");
+                textInput.placeholder = "Type choice label"
+                textInput.name = "one_choice[]";
 
-            let textInput = document.createElement("input");
-            textInput.type = "text";
-            textInput.classList.add("form-control", "border", "border-1", "border-primary", "rounded-0");
-            textInput.placeholder = "Type choice label"
-            textInput.name = "one_choice[]";
 
 
+                let fragment = document.createDocumentFragment();
 
-            let fragment = document.createDocumentFragment();
+                fragment.appendChild(div).appendChild(radio);
+                fragment.appendChild(div).appendChild(textInput);
+                fragment.appendChild(div).appendChild(delButton);
 
-            fragment.appendChild(div).appendChild(radio);
-            fragment.appendChild(div).appendChild(textInput);
-            fragment.appendChild(div).appendChild(delButton);
+                $("#one_choice_group").append(fragment);
 
-            $("#one_choice_group").append(fragment);
 
 
+                let currentFields = $(".one_choice_field");
+                let deleteButtons = $(".delete_one_choice");
 
-            let currentFields = $(".one_choice_field");
-            let deleteButtons = $(".delete_one_choice");
+                for (let i = 0; i < currentFields.length; i++) {
 
-            for (let i = 0; i < currentFields.length; i++) {
+                    deleteButtons[i].addEventListener('click', function() {
 
-                deleteButtons[i].addEventListener('click', function() {
+                        currentFields[i].remove();
+                        deleteButtons[i].remove();
 
-                    currentFields[i].remove();
-                    deleteButtons[i].remove();
+                    });
 
-                });
 
+                }
 
-            }
 
 
+            });
 
-        });
 
 
+            $("#add_multi_choice").click(() => {
 
-        $("#add_multi_choice").click(() => {
+                let fieldCount = 1;
+                let buttonCount = 1;
 
-            let fieldCount = 1;
-            let buttonCount = 1;
+                let div = document.createElement("div");
+                div.classList.add("multi_choice_field", "input-group", "mb-3");
+                div.setAttribute("id", "multi_choice_field_" + fieldCount++);
 
-            let div = document.createElement("div");
-            div.classList.add("multi_choice_field", "input-group" , "mb-3");
-            div.setAttribute("id", "multi_choice_field_" + fieldCount++);
+                let checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.classList.add("me-3");
+                checkbox.setAttribute("disabled", "disabled");
 
-            let checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.classList.add("me-3");
-            checkbox.setAttribute("disabled", "disabled");
+                let delButton = document.createElement("button");
+                delButton.setAttribute("type", "button");
+                delButton.classList.add("delete_multi_choice", "btn", "btn-danger");
+                delButton.setAttribute("id", "delete_multi_choice_" + buttonCount++);
+                delButton.textContent = "delete";
 
-            let delButton = document.createElement("button");
-            delButton.setAttribute("type", "button");
-            delButton.classList.add("delete_multi_choice", "btn", "btn-danger");
-            delButton.setAttribute("id", "delete_multi_choice_" + buttonCount++);
-            delButton.textContent = "delete";
+                let textInput = document.createElement("input");
+                textInput.type = "text";
+                textInput.classList.add("form-control", "border", "border-1", "border-primary", "rounded-0");
+                textInput.placeholder = "Type choice label"
+                textInput.name = "multi_choice[]";
 
-            let textInput = document.createElement("input");
-            textInput.type = "text";
-            textInput.classList.add("form-control", "border", "border-1", "border-primary", "rounded-0");
-            textInput.placeholder = "Type choice label"
-            textInput.name = "multi_choice[]";
 
 
+                let fragment = document.createDocumentFragment();
 
-            let fragment = document.createDocumentFragment();
+                fragment.appendChild(div).appendChild(checkbox);
+                fragment.appendChild(div).appendChild(textInput);
+                fragment.appendChild(div).appendChild(delButton);
 
-            fragment.appendChild(div).appendChild(checkbox);
-            fragment.appendChild(div).appendChild(textInput);
-            fragment.appendChild(div).appendChild(delButton);
+                $("#multi_choice_group").append(fragment);
 
-            $("#multi_choice_group").append(fragment);
 
 
+                let currentFields = $(".multi_choice_field");
+                let deleteButtons = $(".delete_multi_choice");
 
-            let currentFields = $(".multi_choice_field");
-            let deleteButtons = $(".delete_multi_choice");
+                for (let i = 0; i < currentFields.length; i++) {
 
-            for (let i = 0; i < currentFields.length; i++) {
+                    deleteButtons[i].addEventListener('click', function() {
 
-                deleteButtons[i].addEventListener('click', function() {
+                        currentFields[i].remove();
+                        deleteButtons[i].remove();
 
-                    currentFields[i].remove();
-                    deleteButtons[i].remove();
+                    });
 
-                });
 
+                }
 
-            }
 
 
+            });
 
-        });
 
 
 
 
+            $("#answer_category").change(function() {
 
-        $("#answer_category").change(function() {
 
+                if (this.value == "1") {
+                    $("#one_choice").removeClass("d-none");
+                    $("#multiple_choice").addClass("d-none");
 
-            if (this.value == "1") {
-                $("#one_choice").removeClass("d-none");
-                $("#multiple_choice").addClass("d-none");
+                }
 
-            }
+                if (this.value == "2") {
+                    $("#one_choice").addClass("d-none");
+                    $("#multiple_choice").removeClass("d-none");
+                }
 
-            if (this.value == "2") {
-                $("#one_choice").addClass("d-none");
-                $("#multiple_choice").removeClass("d-none");
-            }
+                if (this.value == "3") {
+                    $("#one_choice").addClass("d-none");
+                    $("#multiple_choice").addClass("d-none");
+                }
 
-            if(this.value == "3")
-            {
-                $("#one_choice").addClass("d-none");
-                $("#multiple_choice").addClass("d-none");
-            }
 
+                console.log(this.value)
 
-            console.log(this.value)
 
-
-        });
+            });
 
 
 
@@ -332,9 +330,6 @@ $(document).ready(function() {
 
 
         });
-
-
-
     </script>
 
 </body>

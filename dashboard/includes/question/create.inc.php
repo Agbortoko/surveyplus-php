@@ -2,8 +2,6 @@
 
 require "../../../vendor/autoload.php";
 
-
-use Surveyplus\App\Controllers\ProfileController;
 use Surveyplus\App\Controllers\QuestionController;
 
 session_start();
