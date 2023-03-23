@@ -20,9 +20,9 @@ class SurveyController
     }
 
 
-    public function show_all(): array
+    public function show_all(int $user_id, int $limit = null): array
     {
-        return $this->surveys->get();
+        return $this->surveys->get(null, $user_id, null, $limit);
     }
 
     /**

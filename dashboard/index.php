@@ -4,7 +4,24 @@
 
 <?php require DASHBOARD_PATH . "/partials/header.php" ?>
 
+<?php
 
+use Surveyplus\App\Controllers\AnswerCategoryController;
+use Surveyplus\App\Controllers\QuestionController;
+use Surveyplus\App\Controllers\SurveyController;
+
+    $surveys = new SurveyController();
+    $questions = new QuestionController();
+    $answer_types = new AnswerCategoryController();
+
+    $user_id = $_SESSION["user_id"];
+
+    $all_surveys = $surveys->show_all($user_id, 3);
+    $number_of_surveys = count($surveys->show_all($user_id));
+    $number_of_questions = count($questions->show_all($user_id));
+    $number_of_answertypes = count($answer_types->show_all());
+
+?>
 
 <body class="sb-nav-fixed">
 
@@ -44,10 +61,10 @@
                             <div class="card bg-primary text-white mb-4" style="background-color: #526cfe !important;">
                                 <div class="card-body row align-items-center">
                                     <div class="col-lg-6">Surveys</div>
-                                    <div class="col-lg-6 text-end fs-6">60</div>
+                                    <div class="col-lg-6 text-end fs-6"><?=  !empty($number_of_surveys) ? $number_of_surveys : 0  ?></div>
                                 </div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View</a>
+                                    <a class="small text-white stretched-link" href="<?= DASHBOARD_URL . "/survey/" ?>">View</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -56,10 +73,10 @@
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body row align-items-center">
                                     <div class="col-lg-6">Questions</div>
-                                    <div class="col-lg-6 text-end fs-6">60</div>
+                                    <div class="col-lg-6 text-end fs-6"><?=  !empty($number_of_questions) ? $number_of_questions : 0  ?></div>
                                 </div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View</a>
+                                    <a class="small text-white stretched-link" href="<?= DASHBOARD_URL . "/question/" ?>">View</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -68,7 +85,7 @@
                             <div class="card bg-success text-white mb-4" style="background-color: #526cfe !important;">
                                 <div class="card-body row align-items-center">
                                     <div class="col-lg-6">Answers</div>
-                                    <div class="col-lg-6 text-end fs-6">60</div>
+                                    <div class="col-lg-6 text-end fs-6">0</div>
                                 </div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-white stretched-link" href="#">View</a>
@@ -79,11 +96,11 @@
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body row align-items-center">
-                                    <div class="col-lg-6">Categories</div>
-                                    <div class="col-lg-6 text-end fs-6">60</div>
+                                    <div class="col-lg-6">Answer Types</div>
+                                    <div class="col-lg-6 text-end fs-6"><?=  !empty($number_of_answertypes) ? $number_of_answertypes : 0  ?></div>
                                 </div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View</a>
+                                    <a class="small text-white stretched-link" href="<?= DASHBOARD_URL . "/question/" ?>">View</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -112,48 +129,65 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            DataTable Example
+                            Recently Added Surveys
                         </div>
                         <div class="card-body">
-                            <table id="datatablesSimple">
+                            
+                        <table id="datatablesSimple">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>Description</th>
+                                        <th>Created</th>
+                                        <th>Updated</th>
+                                        <th>Published</th>
+                                        <th>Expires</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>Description</th>
+                                        <th>Created</th>
+                                        <th>Updated</th>
+                                        <th>Published</th>
+                                        <th>Expires</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    
+                                    <?php if (isset($all_surveys) && !empty($all_surveys)) : ?>
+                                        <?php foreach ($all_surveys as $survey) : ?>
+
+                                            <tr>
+                                                <td>
+                                                    <?= $survey["name"] ?>
+                                                    <?php if($survey["published"] != 1): ?>
+
+                                                        <div class="d-block p-0">
+                                                            <a href="<?= DASHBOARD_URL . '/survey/edit.php?survey=' . $survey['id'] . '&action=edit' ?>">Edit Survey</a>
+                                                        </div>
+
+                                                    <?php endif ?>
+                                                </td>
+                                                <td><?= minimize($survey["description"]) ?></td>
+                                                <td><?= $survey["createdOn"] ?></td>
+                                                <td><?= $survey["updatedOn"] ?></td>
+                                                <td>
+                                                    <?php if($survey["published"] == 1): ?>
+                                                        <span class="badge bg-primary">Published</span>
+                                                    <?php else: ?>
+                                                        <span class="badge bg-secondary">Not Published</span>
+                                                    <?php endif ?>
+                                                </td>
+                                                <td><?= $survey["expiresOn"] ?></td>
+                                                
+                                            </tr>
+
+                                        <?php endforeach ?>
+
+
+                                    <?php endif ?>
+
                                 </tbody>
                             </table>
                         </div>

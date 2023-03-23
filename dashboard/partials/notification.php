@@ -66,6 +66,10 @@
                 <p class="mb-0 fs-3 fw-bold text-center">You cannot update a published survey!</p>
             <?php endif ?>
 
+            <?php if ($_GET['error'] == "updatefailed" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Survey update failed!</p>
+            <?php endif ?>
+
             <?php if ($_GET['error'] == "deletenotallowed" && $_GET['type'] == "survey") : ?>
                 <p class="mb-0 fs-3 fw-bold text-center">You cannot delete a published survey!</p>
             <?php endif ?>
@@ -88,6 +92,10 @@
 
             <?php if ($_GET['error'] == "updatenotallowed" && $_GET['type'] == "question") : ?>
                 <p class="mb-0 fs-3 fw-bold text-center">You cannot update the question of a published survey!</p>
+            <?php endif ?>
+
+            <?php if ($_GET['error'] == "updatefailed" && $_GET['type'] == "question") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Question Update Failed!</p>
             <?php endif ?>
 
             <?php if ($_GET['error'] == "deletenotallowed" && $_GET['type'] == "question") : ?>

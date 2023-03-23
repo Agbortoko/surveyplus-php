@@ -4,7 +4,7 @@ namespace Surveyplus\App\Controllers;
 
 use Surveyplus\App\Models\AnswerCategories;
 
-class AnswerCategoryController extends BaseController
+class AnswerCategoryController
 {
     public AnswerCategories $answer_categories;
 
@@ -26,9 +26,9 @@ class AnswerCategoryController extends BaseController
 
 
 
-    public function show_all(): array
+    public function show_all(int $limit = null): array
     {
-        return $this->answer_categories->get();
+        return $this->answer_categories->get(null, $limit);
     }
 
     

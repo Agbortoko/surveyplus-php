@@ -12,13 +12,14 @@ final class Surveys extends BaseModel
     /**
      * Get survey data
      *
-     * @param integer|null $survey_id
-     * @param integer|null $user_id
-     * @param bool|null $published
+     * @param integer|null $survey_id - Get survey wit id
+     * @param integer|null $user_id - Get with user id
+     * @param bool|null $published - Get by state
+     * @param integer|null $limit - Limit number of items to get
      * 
      * @return array
      */
-    public function get(int $survey_id = null, int $user_id = null, bool $published = null) : array
+    public function get(int $survey_id = null, int $user_id = null, bool $published = null, int $limit = null) : array
     {
         if(isset($published) && isset($user_id)){
 
@@ -39,11 +40,18 @@ final class Surveys extends BaseModel
             }
         }
 
+        if($user_id != null && $limit != null)
+        {
+            $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id ORDER BY id DESC LIMIT $limit")->findAll();
+            return $surveys; // Return all surveys with user id limit 
+        }
 
         if($user_id != null){
             $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id ORDER BY id DESC")->findAll();
             return $surveys; // Return all surveys with user id
         }
+
+
         
 
 

@@ -9,7 +9,7 @@ final class AnswerCategories extends BaseModel
     public string $table = "answer_category";
 
 
-    public function get(int $answer_category_id = null) 
+    public function get(int $answer_category_id = null , int $limit = null) 
     {
         if($answer_category_id != null){
 
@@ -20,6 +20,13 @@ final class AnswerCategories extends BaseModel
             }
             
 
+        }
+
+
+        if($limit != null)
+        {
+            $answer_categories = $this->select("SELECT *  FROM $this->table LIMIT $limit")->findAll();
+            return $answer_categories;
         }
 
         $answer_categories = $this->select("SELECT *  FROM $this->table")->findAll();
