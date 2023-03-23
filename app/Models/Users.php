@@ -11,7 +11,7 @@ final class Users extends BaseModel
 
     public function get() 
     {
-        $users = $this->select("SELECT *  FROM $this->table")->findAll();
+        $users = $this->select("SELECT *  FROM $this->table ORDER BY id DESC")->findAll();
         return $users;
     }
 
@@ -33,7 +33,7 @@ final class Users extends BaseModel
 
     /** Verify if user with email already exist in database */
     public function find(string $email){
-        $users = $this->select("SELECT * FROM $this->table WHERE email = '$email'")->findAll();
+        $users = $this->select("SELECT * FROM $this->table WHERE email = '$email' ORDER BY id DESC")->findAll();
         return $users;
     }
 

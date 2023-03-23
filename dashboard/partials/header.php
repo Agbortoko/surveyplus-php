@@ -17,7 +17,7 @@
         <link href="<?= DASHBOARD_URL ?>/assets/datatables/style.css" rel="stylesheet" />
         <link href="<?= DASHBOARD_URL ?>/css/styles.css" rel="stylesheet" />
         <script src="<?= DASHBOARD_URL ?>/assets/fontawesome/js/all.js" crossorigin="anonymous"></script>
-        <script src="<?= DASHBOARD_URL ?>/assets/sweetalert/sweetalert.min.js"></script>
+        <script src="<?= DASHBOARD_URL ?>/assets/jquery-3.5.1.min.js"></script>
     </head>
 
     

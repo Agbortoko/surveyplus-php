@@ -110,7 +110,11 @@ $all_questions = $questions->show_survey_question($_SESSION["user_id"]);
                                                 <td><?= ucwords($questions["answer_type"]) ?></td>
                                                 <td><?= $questions["createdOn"] ?></td>
                                                 <td>
+                                                <?php if($questions["survey_published"] != 1): ?>
                                                     <a href="<?= DASHBOARD_URL . '/question/delete.php?question=' . $questions['id'] . '&action=delete' ?>" class="btn btn-danger btn-sm">Delete</a>
+
+                                                <?php endif ?>
+
                                                 </td>
                                             </tr>
 

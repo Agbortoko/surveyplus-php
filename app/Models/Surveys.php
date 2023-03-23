@@ -24,7 +24,7 @@ final class Surveys extends BaseModel
 
             $is_published = ($published == true) ? $published = 1 : $published = 0;
             
-            $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id AND published = $is_published")->findAll();
+            $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id AND published = $is_published ORDER BY id DESC")->findAll();
 
             return $surveys; // Return all surveys with user id and check for published state
         }
@@ -32,7 +32,7 @@ final class Surveys extends BaseModel
 
         if($survey_id != null){
 
-            $surveys = $this->select("SELECT * FROM $this->table WHERE id = $survey_id AND user_id = $user_id")->findAll();
+            $surveys = $this->select("SELECT * FROM $this->table WHERE id = $survey_id AND user_id = $user_id ORDER BY id DESC")->findAll();
 
             foreach($surveys as $survey){
                 return $survey; // Return single survey incase id paramater is set
@@ -41,7 +41,7 @@ final class Surveys extends BaseModel
 
 
         if($user_id != null){
-            $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id")->findAll();
+            $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id ORDER BY id DESC")->findAll();
             return $surveys; // Return all surveys with user id
         }
         
@@ -49,7 +49,7 @@ final class Surveys extends BaseModel
 
     
 
-        $surveys = $this->select("SELECT * FROM $this->table")->findAll();
+        $surveys = $this->select("SELECT * FROM $this->table ORDER BY id DESC")->findAll();
         return $surveys;
     }
 

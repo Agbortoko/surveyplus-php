@@ -14,3 +14,5 @@
 <script src="<?= DASHBOARD_URL ?>/assets/demo/chart-bar-demo.js"></script>
 <script src="<?= DASHBOARD_URL ?>/js/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="<?= DASHBOARD_URL ?>/js/datatables-simple-demo.js"></script>
+
+

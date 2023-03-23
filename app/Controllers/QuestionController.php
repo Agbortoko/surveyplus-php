@@ -47,6 +47,25 @@ class QuestionController
         return false;
     }
 
-    
 
+    public function modify(array $data, int $question_id) : bool
+    {
+        if($this->questions->update($data, $question_id)){
+            return true;
+        }
+
+        return false;
+    }
+
+    
+    public function delete(int $question_id)
+    {
+        $delete_question= $this->questions->delete($question_id);
+
+        if($delete_question){
+            return true;
+        }
+
+        return false;
+    }
 }

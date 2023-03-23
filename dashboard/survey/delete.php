@@ -4,6 +4,8 @@ require "../../vendor/autoload.php";
 
 use Surveyplus\App\Controllers\SurveyController;
 
+session_start();
+
 if(isset($_GET["survey"]) && isset($_GET["action"]) && $_GET["action"] == "delete")
 {
     $survey_id = $_GET["survey"];
@@ -18,7 +20,16 @@ if(isset($_GET["survey"]) && isset($_GET["action"]) && $_GET["action"] == "delet
     }
 
 
+   try{
+
     $delete = $survey->delete($survey_id);
+
+   }
+   catch(PDOException $e)
+   {
+        header("Location:" . DASHBOARD_URL . "/survey/index.php?type=survey&error=surveyhasquestions");
+        exit(0);
+   }
 
     if(!$delete)
     {

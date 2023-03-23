@@ -16,7 +16,7 @@ class Profiles extends BaseModel
      */
     public function find_all(int $userId)
     {
-        $profiles = $this->select("SELECT * FROM $this->table WHERE user_id = $userId")->findAll();
+        $profiles = $this->select("SELECT * FROM $this->table WHERE user_id = $userId ORDER BY id DESC")->findAll();
         return $profiles;
     }
 
@@ -29,7 +29,7 @@ class Profiles extends BaseModel
      */
     public function find(int $userId, int $state)
     {
-        $profiles = $this->select("SELECT * FROM $this->table WHERE user_id = $userId AND isActive = $state")->findAll();
+        $profiles = $this->select("SELECT * FROM $this->table WHERE user_id = $userId AND isActive = $state ORDER BY id DESC")->findAll();
         return $profiles;
     }
 
@@ -71,7 +71,7 @@ class Profiles extends BaseModel
     public function find_username(string $username)
     {
 
-        $profiles = $this->select("SELECT * FROM $this->table WHERE username = '$username'")->findAll();
+        $profiles = $this->select("SELECT * FROM $this->table WHERE username = '$username' ORDER BY id DESC")->findAll();
         return $profiles;
     }
 }

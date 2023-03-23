@@ -28,7 +28,14 @@
                 <p class="mb-0 fs-3 fw-bold text-center">Question Created Successfully</p>
             <?php endif ?>
             
+            <?php if ($_GET['success'] == "updated" && $_GET['type'] == "question") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Question Updated Successfully</p>
+            <?php endif ?>
             
+            <?php if ($_GET['success'] == "deleted" && $_GET['type'] == "question") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Question Deleted Successfully</p>
+            <?php endif ?>
+
         </div>
     </div>
 <?php endif ?>
@@ -71,12 +78,20 @@
                 <p class="mb-0 fs-3 fw-bold text-center">Survey Delete Failed!</p>
             <?php endif ?>
 
+            <?php if ($_GET['error'] == "surveyhasquestions" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Survey has questions, so it cannot be deleted! </p>
+            <?php endif ?>
+
             <?php if ($_GET['error'] == "savefailed" && $_GET['type'] == "question") : ?>
                 <p class="mb-0 fs-3 fw-bold text-center">Question Not Saved!</p>
             <?php endif ?>
 
             <?php if ($_GET['error'] == "updatenotallowed" && $_GET['type'] == "question") : ?>
-                <p class="mb-0 fs-3 fw-bold text-center">You cannot update the question a published survey!</p>
+                <p class="mb-0 fs-3 fw-bold text-center">You cannot update the question of a published survey!</p>
+            <?php endif ?>
+
+            <?php if ($_GET['error'] == "deletenotallowed" && $_GET['type'] == "question") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">You cannot delete the questions of a published survey!</p>
             <?php endif ?>
 
         </div>

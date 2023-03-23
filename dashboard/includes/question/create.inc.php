@@ -20,6 +20,10 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
     $survey_id = isset($_POST['survey']) ? clean_input($_POST['survey']) : null;
     $answer_category_id = isset($_POST['answer_category']) ? clean_input($_POST['answer_category']) : null;
 
+    $multi_choice = isset($_POST["multi_choice"]) ? $_POST["multi_choice"] : null;
+    $one_choice = isset($_POST["one_choice"]) ? $_POST["one_choice"] : null;
+
+
 
     // Check for empty fields
     if(empty($name) || empty($survey_id) || empty($answer_category_id))
@@ -34,6 +38,21 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
         "survey_id" => $survey_id,
         "answer_category_id" => $answer_category_id
     ];
+
+
+    // Check answer type and place description if needed
+
+    if($answer_category_id == 1)
+    {
+        $data["description"] = json_encode($one_choice);
+    }
+    else if($answer_category_id == 2)
+    {
+        $data["description"] = json_encode($multi_choice);
+    }else
+    {
+        $data["description"] = NULL;
+    }
 
 
     $save = $questions->create($data);

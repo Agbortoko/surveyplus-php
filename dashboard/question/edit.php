@@ -83,6 +83,8 @@ if(isset($_GET["question"]) && isset($_GET["action"]) && $_GET["action"] == "edi
 
                         <form action="<?= DASHBOARD_URL . "/includes/question/update.inc.php" ?>" method="POST">
 
+                                <input type="hidden" name="question_id" value="<?= $question["id"] ?>">
+
 
                                <div class="form-group mb-4">
                                     <label for="name" class="mb-2 fw-bold">Name</label>

@@ -27,7 +27,7 @@ final class Questions extends BaseModel
                     ON q.survey_id = s.id 
                 JOIN answer_category ac 
                     ON q.answer_category_id = ac.id 
-                WHERE s.user_id = $user_id AND q.id = $question_id")->findAll();
+                WHERE s.user_id = $user_id AND q.id = $question_id ORDER BY q.id DESC")->findAll();
 
 
             foreach($questions as $question ){
@@ -44,7 +44,7 @@ final class Questions extends BaseModel
         }
 
 
-        $questions = $this->select("SELECT *  FROM $this->table")->findAll();
+        $questions = $this->select("SELECT *  FROM $this->table ORDER BY id DESC")->findAll();
         return $questions;
     }
 
@@ -53,10 +53,11 @@ final class Questions extends BaseModel
     public function save(array $data)
     {
         
-        $this->stmt = $this->conn->prepare("INSERT INTO $this->table (name, survey_id, answer_category_id) VALUES (:name, :survey_id, :answer_category_id)");
+        $this->stmt = $this->conn->prepare("INSERT INTO $this->table (name, description, survey_id, answer_category_id) VALUES (:name, :description, :survey_id, :answer_category_id)");
 
         // Bind parameters to prepared indicators
         $this->stmt->bindParam(":name", $data["name"]);
+        $this->stmt->bindParam(":description", $data["description"]);
         $this->stmt->bindParam(":survey_id", $data["survey_id"]);
         $this->stmt->bindParam(":answer_category_id", $data["answer_category_id"]);
 
@@ -90,9 +91,45 @@ final class Questions extends BaseModel
                 ON q.survey_id = s.id 
             JOIN answer_category ac 
                 ON q.answer_category_id = ac.id 
-            WHERE s.user_id = $user_id")->findAll();
+            WHERE s.user_id = $user_id ORDER BY q.id DESC")->findAll();
+
+            
 
         return $questions;
+    }
+
+
+
+    public function update(array $data, int $question_id)
+    {
+
+        $name = $data["name"];
+        $answer_category_id = $data["answer_category_id"];
+
+        $this->stmt = $this->conn->prepare("UPDATE $this->table SET name = '$name', answer_category_id = '$answer_category_id' WHERE id = $question_id");
+
+
+        if(!$this->stmt->execute())
+        {
+             return false;
+        }
+
+        return true;
+
+    }
+
+
+
+
+    public function delete(int $question_id)
+    {
+        $this->stmt = $this->conn->prepare("DELETE FROM $this->table WHERE id = $question_id");
+
+        if(!$this->stmt->execute())
+        {
+             return false;
+        }
+        return true;
     }
 
 
