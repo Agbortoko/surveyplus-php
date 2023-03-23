@@ -85,7 +85,7 @@ $all_answer_categories = $answer_categories->show_all();
                                             </option>
                                         <?php endforeach ?>
                                     <?php else : ?>
-                                        <option selected disabled>No Answer Category Found</option>
+                                        <option selected disabled>No Survey Found</option>
                                     <?php endif ?>
                                 </select>
                             </div>
