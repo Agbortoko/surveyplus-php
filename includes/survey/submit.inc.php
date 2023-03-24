@@ -18,6 +18,26 @@ if (isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST") {
     $survey_id = $_POST["survey_id"];
     $profile_id = $_POST["profile_id"];
 
+
+    if(!isset($email) || empty($email)){
+        // redirect back if email not found or go back to homepage
+        if(isset($_SERVER['HTTP_REFERER'])) {
+
+            $previous = $_SERVER['HTTP_REFERER'];
+
+            header('Location: ' . $previous);
+            exit(0);
+
+
+        }else{
+            header('Location: ' . base_url());
+            exit(0);
+
+        }
+        
+        // header("Location: " . base_url("email_verification.php?error=null&type=email"));
+    }
+
     // Empty arrays to hold values below
     $checkboxes = [];
     $radios = [];
@@ -84,6 +104,9 @@ if (isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
+    // Save to database answers
+    // Verify survey taker email and save in database
+    // Save to survey taker answer
 
 
 

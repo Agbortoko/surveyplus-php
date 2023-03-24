@@ -42,6 +42,11 @@
                 <p class="mb-0 fs-5 fw-bold text-center">Sorry! Username not available</p>
             <?php endif ?>
 
+
+            <?php if ($_GET['error'] == "null" && $_GET['type'] == "email") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Please Invalid </p>
+            <?php endif ?>
+
         </div>
     </div>
 <?php endif ?>

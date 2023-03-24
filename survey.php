@@ -142,11 +142,12 @@ use Surveyplus\App\Controllers\QuestionController;
 
                 <div class="container p-0 mt-5 survey-taker">
 
-                <h2 class="mb-3 text-center fw-bold text-primary">Validate Survey</h2>
+                <h2 class="text-center fw-bold text-primary">Validate Survey</h2>
+                <p class="text-center mb-4"><small>Your Email Address is required</small></p>
 
                     <label for="email" class="fw-bold fs-3 mb-2">Your Email Address <span class="text-danger">*</span></label>
                     <div class="form-group mb-4">
-                        <input type="email" name="email" class="form-control border border-1 border-primary rounded-0" placeholder="Type your email address" />
+                        <input type="email" name="email" class="form-control border border-1 border-primary rounded-0" placeholder="Type your email address"  required/>
                     </div>
         
                     <label for="email" class="fw-bold fs-3 mb-2">What do you think about this survey?</label>
