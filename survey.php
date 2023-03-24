@@ -72,8 +72,8 @@ use Surveyplus\App\Controllers\QuestionController;
                             <?php foreach ($description as $label) : ?>
 
                                 <div class="container p-0 my-2">
-                                    <input type="radio" name="<?= "radio_" . $question["id"] ?>" class="form-check-input border border-1 border-primary">
-                                    <label class="ms-2 fw-bold form-check-label" for="<?= "radio_" . $question["id"] ?>"><?= $label ?></label>
+                                    <input type="radio" name="<?= "radio_" . $question["id"] ?>" class="form-check-input border border-1 border-primary" value="<?= $label ?>">
+                                    <label class="ms-2 fw-bold form-check-label"  for="<?= "radio_" . $question["id"] ?>"><?= $label ?></label>
                                 </div>
 
                             <?php endforeach ?>
@@ -99,7 +99,7 @@ use Surveyplus\App\Controllers\QuestionController;
                             <?php foreach ($description as $label) : ?>
 
                                 <div class="container p-0 my-2">
-                                    <input type="checkbox" name="<?= "checkbox_" . $question["id"] ?>" class="form-check-input border border-1 border-primary">
+                                    <input type="checkbox" name="<?= "checkbox_" . $question["id"] . "[]" ?>" class="form-check-input border border-1 border-primary"  value="<?= $label ?>">
                                     <label class="ms-2 fw-bold form-check-label" for="<?= "checkbox_" . $question["id"] ?>"><?= $label ?></label>
                                 </div>
 
