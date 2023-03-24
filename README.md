@@ -10,7 +10,26 @@ https://www.codingtag.com/htaccess-deny-direct-access-to-folder-in-website
 
 htaccess files (or "distributed configuration files") provide a way to make configuration changes on a per-directory basis. A file, containing one or more configuration directives, is placed in a particular document directory, and the directives apply to that directory, and all subdirectories thereof.
 
-✔️
+
+## Read Later to understand more about CSRF tokens
+
+[PHP csrf](https://www.phptutorial.net/php-tutorial/php-csrf/)
+
+#### What is CSRF?
+
+CSRF stands for cross-site request forgery. It’s a kind of attack in which a hacker forces you to execute an action against a website where you’re currently logged in.
+
+For example, you visit the malicious-site.com that has a hidden form. And that form submits on page load to yourbank.com/transfer-fund form.
+
+Because you’re currently logged in to the yourbank.com, the request silently transfers a fund out of your bank account.
+
+If yourbank.com/transfer-fund implements the CSRF correctly, it generates a one-time token and inserts the token into the fund transfer form like this:
+
+```html
+<input type="hidden" 
+       name="token"
+       value="b3f44c1eb885409c222fdb78c125f5e7050ce4f3d15e8b15ffe51678dd3a33d3a18dd3">
+```
 
 
 ## Options to Implement
