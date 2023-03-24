@@ -72,3 +72,29 @@ If `yourbank.com/transfer-fund` implements the CSRF correctly, it generates a on
 Survey table `user_id` does not reference `id` in `user` table but id of the user `profile` ❌
 
 Changed survey `user_id` field name to `profile_id` ✔️
+
+Changed the table structure for answer table, name to description
+
+
+## Code consitency
+Trying to make code a little more consistent! to avoid mixups. Making points to make modifications later.
+
+###  Prefered case for functions methods
+camelCase => getUser
+
+###  Prefered case for classes
+Pascal Case => UserController
+
+###  Prefered case for variables, parameters, properties
+
+camelCase, for words like ID i can capitalize.
+
+###  Models methods
+
+ -> get(int $uniqueID) -> Gets specific data from database table, returns an array of the value you requested. Will take parameters
+
+ -> getAll() -> Gets all data from database table.
+
+
+### Controller methods
+

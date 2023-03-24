@@ -10,17 +10,24 @@
  */
 function debug_array(array $arrayToDebug, bool $multi = false)
 {
-    if($multi == true){
+    if ($multi == true) {
 
-        foreach($arrayToDebug as $array)
-        {
+
+
+
+        foreach ($arrayToDebug as $array) {
+
+
+            echo "<h3>Array Starts</h3>";
+
             echo "<pre> <code>";
             print_r($array);
             echo "</pre> </code>";
             echo "-----------------------";
             echo "<br>";
-            
         }
+
+
         echo strtoupper("<p> Under Development </p>");
         exit(0); // stops the script from loading below
     }

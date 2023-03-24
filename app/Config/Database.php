@@ -6,7 +6,7 @@ use PDO;
 use PDOException;
 
 /**
- * Manage Database Base actions
+ * Manage Database Connection
  */
 class Database{
 

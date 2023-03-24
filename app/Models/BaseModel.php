@@ -55,7 +55,8 @@ class BaseModel
      *
      * @return array
      */
-    public function findAll(){
+    public function findAll() : array
+    {
         return $this->stmt->fetchAll();
     }
 
