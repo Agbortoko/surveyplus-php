@@ -4,7 +4,7 @@
 use Surveyplus\App\Controllers\SurveyController;
 use Surveyplus\App\Controllers\QuestionController;
 ?>
-
+<?php $pageTitle = "View Survey"; ?>
 <?php require "partials/header.php" ?>
 
 
@@ -45,74 +45,94 @@ use Surveyplus\App\Controllers\QuestionController;
     // debug_array($survey);
     ?>
 
+    <?php require "partials/navigation.php" ?>
 
     <main class="container my-5">
 
 
-        <h1 class="fw-bold text-center mb-5 text-primary"><?= $survey["name"] ?></h1>
+        <h1 class="fw-bold text-center mb-5 text-primary text-decoration-underline"><?= $survey["name"] ?></h1>
 
 
-        <form action="" method="POST">
+        <form action="<?= base_url("includes/survey/submit.inc.php") ?>" method="POST">
 
-        <?php foreach ($all_survey_questions as $question) : ?>
+            <?php foreach ($all_survey_questions as $question) : ?>
 
-            <?php $count_question++ ?>
-
-
-            <?php if ($question["answer_type_id"] == 1) : ?>
-
-                <div class="form-group mb-4 border border-1 border-primary py-4 px-2">
-
-                    <h4><?= $count_question . ") " . ucwords($question["name"]) ?></h4>
-
-                    <?php $description = json_decode($question["description"]); ?>
-
-                    <?php if (isset($description) && !empty($description)) : ?>
-                        <?php foreach ($description as $label) : ?>
-
-                            <div class="container p-0 my-2">
-                                <input type="radio" name="<?= "radio_" . $question["id"] ?>">
-                                <label class="ms-2 fw-bold" for="<?= "radio_" . $question["id"] ?>"><?= $label ?></label>
-                            </div>
-
-                        <?php endforeach ?>
-
-                    <?php endif ?>
-
-                </div>
-            <?php endif ?>
+                <?php $count_question++ ?>
 
 
+                <?php if ($question["answer_type_id"] == 1) : ?>
+
+                    <div class="form-group mb-4 border border-1 border-primary py-4 px-4">
+
+                        <h4><?= $count_question . ") " . ucwords($question["name"]) ?></h4>
+
+                        <?php $description = json_decode($question["description"]); ?>
+
+                        <?php if (isset($description) && !empty($description)) : ?>
+                            <?php foreach ($description as $label) : ?>
+
+                                <div class="container p-0 my-2">
+                                    <input type="radio" name="<?= "radio_" . $question["id"] ?>">
+                                    <label class="ms-2 fw-bold" for="<?= "radio_" . $question["id"] ?>"><?= $label ?></label>
+                                </div>
+
+                            <?php endforeach ?>
+
+                        <?php endif ?>
+
+                    </div>
+                <?php endif ?>
 
 
-            <?php if ($question["answer_type_id"] == 2) : ?>
-
-                <div class="form-group mb-4 border border-1 border-primary py-4 px-2">
-
-                    <h4><?= $count_question . ") " . ucwords($question["name"]) ?></h4>
-
-                    <?php $description = json_decode($question["description"]); ?>
-
-                    <?php if (isset($description) && !empty($description)) : ?>
-
-                        <?php foreach ($description as $label) : ?>
-
-                            <div class="container p-0 my-2">
-                                <input type="checkbox" name="<?= "checkbox_" . $question["id"] ?>">
-                                <label class="ms-2 fw-bold" for="<?= "checkbox_" . $question["id"] ?>"><?= $label ?></label>
-                            </div>
-
-                        <?php endforeach ?>
-
-                    <?php endif ?>
-                </div>
-
-            <?php endif ?>
 
 
-        <?php endforeach ?>
+                <?php if ($question["answer_type_id"] == 2) : ?>
 
-            <button type="submit" class="btn btn-primary w-100 text-white rounded-0">Submit Survey</button>
+                    <div class="form-group mb-4 border border-1 border-primary py-4 px-4">
+
+                        <h4><?= $count_question . ") " . ucwords($question["name"]) ?></h4>
+
+                        <?php $description = json_decode($question["description"]); ?>
+
+                        <?php if (isset($description) && !empty($description)) : ?>
+
+                            <?php foreach ($description as $label) : ?>
+
+                                <div class="container p-0 my-2">
+                                    <input type="checkbox" name="<?= "checkbox_" . $question["id"] ?>">
+                                    <label class="ms-2 fw-bold" for="<?= "checkbox_" . $question["id"] ?>"><?= $label ?></label>
+                                </div>
+
+                            <?php endforeach ?>
+
+                        <?php endif ?>
+                    </div>
+
+                <?php endif ?>
+
+
+
+
+                <?php if ($question["answer_type_id"] == 3) : ?>
+
+                    <div class="form-group mb-4 border border-1 border-primary py-4 px-4">
+
+                        <h4><?= $count_question . ") " . ucwords($question["name"]) ?></h4>
+
+
+                        <div class="container p-0 my-3">
+                            <input type="text" name="<?= "textfield_" . $question["id"] ?>" class="form-control border border-1 border-primary rounded-0" placeholder="Type your response">
+                        </div>
+
+
+                    </div>
+
+                <?php endif ?>
+
+
+            <?php endforeach ?>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100 text-white rounded-0">Submit Survey</button>
 
         </form>
 
@@ -127,3 +147,6 @@ use Surveyplus\App\Controllers\QuestionController;
 
 
     </main>
+
+
+    <?php require "partials/footer.php" ?>
