@@ -6,19 +6,25 @@
 
 <?php
 
-use Surveyplus\App\Controllers\AnswerCategoryController;
+use Surveyplus\App\Controllers\ProfileController;
 use Surveyplus\App\Controllers\QuestionController;
 use Surveyplus\App\Controllers\SurveyController;
+use Surveyplus\App\Controllers\AnswerCategoryController;
 
     $surveys = new SurveyController();
     $questions = new QuestionController();
     $answer_types = new AnswerCategoryController();
+    $profiles = new ProfileController();
 
+    
     $user_id = $_SESSION["user_id"];
 
-    $all_surveys = $surveys->show_all($user_id, 2);
-    $number_of_surveys = count($surveys->show_all($user_id));
-    $number_of_questions = count($questions->show_all($user_id));
+    // Get current active user profile
+    $profile = $profiles->all_active_profiles($user_id);
+
+    $all_surveys = $surveys->show_all($profile["id"], 2);
+    $number_of_surveys = count($surveys->show_all($profile["id"]));
+    $number_of_questions = count($questions->show_all($profile["id"]));
     $number_of_answertypes = count($answer_types->show_all());
 
 ?>
