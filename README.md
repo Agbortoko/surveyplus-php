@@ -50,5 +50,6 @@ htaccess files (or "distributed configuration files") provide a way to make conf
 
 ## Issue noticed
 
-Survey table user_id does not reference id in user table but id of the user profile ❌
-Changed survey user_id field name to profile_id ✔️
+Survey table `user_id` does not reference `id` in `user` table but id of the user `profile` ❌
+
+Changed survey `user_id` field name to `profile_id` ✔️
