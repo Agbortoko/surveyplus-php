@@ -1,6 +1,7 @@
 <?php
 
 use Surveyplus\App\Controllers\SurveyController;
+use Surveyplus\App\Controllers\ProfileController;
 
 $pageTitle = "Edit Survey"; ?>
 
@@ -13,6 +14,7 @@ $pageTitle = "Edit Survey"; ?>
 if(isset($_GET["survey"]) && isset($_GET["action"]) && $_GET["action"] == "edit"){
 
     $survey_id = $_GET["survey"];
+    $user_id = $_SESSION["user_id"];
 
     $surveys = new SurveyController();
 
@@ -23,9 +25,14 @@ if(isset($_GET["survey"]) && isset($_GET["action"]) && $_GET["action"] == "edit"
          header("Location:" . DASHBOARD_URL . "/survey/index.php?type=survey&error=updatenotallowed");
          exit(0);
      }
-     
 
-    $survey = $surveys->edit($survey_id, $_SESSION["user_id"]);
+
+    // Modify survy for a particular profile id only
+    $profiles =  new ProfileController();
+
+    $profile = $profiles->all_active_profiles($user_id);
+    
+    $survey = $surveys->edit($survey_id, $profile["id"]);
 }
 
 

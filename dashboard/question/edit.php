@@ -1,8 +1,9 @@
 <?php
 
 use Surveyplus\App\Controllers\SurveyController;
-use Surveyplus\App\Controllers\AnswerCategoryController;
+use Surveyplus\App\Controllers\ProfileController;
 use Surveyplus\App\Controllers\QuestionController;
+use Surveyplus\App\Controllers\AnswerCategoryController;
 
 $pageTitle = "Edit Questions"; ?>
 
@@ -22,14 +23,19 @@ if (isset($_GET["question"]) && isset($_GET["action"]) && $_GET["action"] == "ed
     $answer_categories = new AnswerCategoryController();
     $questions = new QuestionController();
 
-    $all_surveys = $surveys->show_user_survey($user_id, false);
+    $profiles =  new ProfileController();
+
+    $profile = $profiles->all_active_profiles($user_id);
+
+
+    $all_surveys = $surveys->show_user_survey($profile["id"], false);
 
     // print_r($all_surveys);
 
     $all_answer_categories = $answer_categories->show_all();
 
 
-    $question = $questions->show($question_id, $user_id);
+    $question = $questions->show($question_id, $profile["id"]);
 
     if ($question["survey_published"] == 1) {
         header("Location:" . DASHBOARD_URL . "/question/index.php?type=question&error=updatenotallowed");

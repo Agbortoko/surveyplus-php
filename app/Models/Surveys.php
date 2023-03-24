@@ -13,7 +13,7 @@ final class Surveys extends BaseModel
      * Get survey data
      *
      * @param integer|null $survey_id - Get survey wit id
-     * @param integer|null $user_id - Get with user id
+     * @param integer|null $profile_id - Get with user id
      * @param bool|null $published - Get by state
      * @param integer|null $limit - Limit number of items to get
      * 
@@ -21,11 +21,11 @@ final class Surveys extends BaseModel
      */
     public function get(int $survey_id = null, int $profile_id = null, bool $published = null, int $limit = null) : array
     {
-        if(isset($published) && isset($user_id)){
+        if(isset($published) && isset($profile_id)){
 
             $is_published = ($published == true) ? $published = 1 : $published = 0;
             
-            $surveys = $this->select("SELECT * FROM $this->table WHERE user_id = $user_id AND published = $is_published ORDER BY id DESC")->findAll();
+            $surveys = $this->select("SELECT * FROM $this->table WHERE profile_id = $profile_id AND published = $is_published ORDER BY id DESC")->findAll();
 
             return $surveys; // Return all surveys with user id and check for published state
         }
@@ -93,9 +93,9 @@ final class Surveys extends BaseModel
         $published = $data["published"];
         $publishedOn = $data["publishedOn"];
         $expiresOn = $data["expiresOn"];
-        $user_id = $data["user_id"];
+        $profile_id = $data["profile_id"];
         
-        $this->stmt = $this->conn->prepare("UPDATE $this->table SET updatedOn = '$updated_on', name = '$name', description = '$description', published = $published, publishedOn = '$publishedOn', expiresOn = '$expiresOn', user_id = $user_id WHERE id = $survey_id");
+        $this->stmt = $this->conn->prepare("UPDATE $this->table SET updatedOn = '$updated_on', name = '$name', description = '$description', published = $published, publishedOn = '$publishedOn', expiresOn = '$expiresOn', profile_id = $profile_id WHERE id = $survey_id");
 
 
         if(!$this->stmt->execute())

@@ -1,6 +1,7 @@
 <?php
 
 use Surveyplus\App\Controllers\SurveyController;
+use Surveyplus\App\Controllers\ProfileController;
 use Surveyplus\App\Controllers\AnswerCategoryController;
 
 $pageTitle = "Add Questions"; ?>
@@ -16,7 +17,11 @@ $user_id = $_SESSION["user_id"];
 $surveys = new SurveyController();
 $answer_categories = new AnswerCategoryController();
 
-$all_surveys = $surveys->show_user_survey($user_id);
+$profiles =  new ProfileController();
+
+$profile = $profiles->all_active_profiles($user_id);
+
+$all_surveys = $surveys->show_user_survey($profile["id"]);
 
 $all_answer_categories = $answer_categories->show_all();
 
@@ -73,6 +78,7 @@ $all_answer_categories = $answer_categories->show_all();
                             <div class="form-group mb-4">
                                 <label for="survey" class="mb-2 fw-bold">Survey</label>
                                 <select name="survey" class="form-select border border-1 border-primary rounded-0">
+                                    <option selected disabled>Select a Survey</option>
                                     <?php if (isset($all_surveys) && !empty($all_surveys)) : ?>
                                         <?php foreach ($all_surveys as $survey) : ?>
                                             <option value="<?= $survey["id"] ?>">

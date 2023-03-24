@@ -10,7 +10,7 @@ session_start();
 
 if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
 {
-
+    $user_id = $_SESSION["user_id"];
 
     $profiles = new ProfileController();
     $surveys = new SurveyController();
@@ -55,6 +55,10 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
     }
 
 
+    // Get current active profile id for user
+
+    $profile = $profiles->all_active_profiles($user_id);
+
 
     $data = [
         "updatedOn" => $updated_on,
@@ -63,7 +67,7 @@ if(isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST")
         "published" => $visbility,
         "publishedOn" => $published_date,
         "expiresOn" => $expires_on,
-        "user_id" => $user_id
+        "profile_id" => $profile["id"]
     ];
 
  
