@@ -72,6 +72,7 @@ class UserController
 
             // Add info to session
             foreach ($profiles as $profile) {
+                $_SESSION["profile_id"] = $profile["id"];
                 $_SESSION['full_name'] = $profile["first_name"] . " " . $profile["last_name"];
                 $_SESSION["handle"] = $profile["handle"];
             }
