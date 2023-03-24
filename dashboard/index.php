@@ -27,6 +27,8 @@ use Surveyplus\App\Controllers\AnswerCategoryController;
     $number_of_questions = count($questions->show_all($profile["id"]));
     $number_of_answertypes = count($answer_types->show_all());
 
+    // debug_array($_SESSION);
+
 ?>
 
 <body class="sb-nav-fixed">

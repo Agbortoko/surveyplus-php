@@ -58,6 +58,9 @@ use Surveyplus\App\Controllers\QuestionController;
         <input type="hidden" value="<?= $survey_id ?>" name="survey_id">
         <input type="hidden" value="<?= $profile_id?>" name="profile_id">
 
+
+        <?php if(isset($all_survey_questions) && !empty($all_survey_questions)): ?>
+
             <?php foreach ($all_survey_questions as $question) : ?>
 
                 <?php $count_question++ ?>
@@ -135,26 +138,37 @@ use Surveyplus\App\Controllers\QuestionController;
 
             <?php endforeach ?>
 
-            <div class="container p-0 mt-5 survey-taker">
 
-            <h2 class="mb-3 text-center fw-bold text-primary">Validate Survey</h2>
 
-                <label for="email" class="fw-bold fs-3 mb-2">Your Email Address <span class="text-danger">*</span></label>
-                <div class="form-group mb-4">
-                    <input type="email" name="email" class="form-control border border-1 border-primary rounded-0" placeholder="Type your email address" />
+                <div class="container p-0 mt-5 survey-taker">
+
+                <h2 class="mb-3 text-center fw-bold text-primary">Validate Survey</h2>
+
+                    <label for="email" class="fw-bold fs-3 mb-2">Your Email Address <span class="text-danger">*</span></label>
+                    <div class="form-group mb-4">
+                        <input type="email" name="email" class="form-control border border-1 border-primary rounded-0" placeholder="Type your email address" />
+                    </div>
+        
+                    <label for="email" class="fw-bold fs-3 mb-2">What do you think about this survey?</label>
+                    <div class="form-group mb-4">
+                        <textarea name="comment" class="form-control border border-1 border-primary rounded-0" placeholder="Comment" style="resize:none"></textarea>
+                    </div>
+
                 </div>
-    
-                <label for="email" class="fw-bold fs-3 mb-2">What do you think about this survey?</label>
-                <div class="form-group mb-4">
-                    <textarea name="comment" class="form-control border border-1 border-primary rounded-0" placeholder="Comment" style="resize:none"></textarea>
-                </div>
+                
 
-            </div>
-            
+                <button type="submit" class="btn btn-primary btn-lg w-100 text-white rounded-0">Submit Survey</button>
 
-            <button type="submit" class="btn btn-primary btn-lg w-100 text-white rounded-0">Submit Survey</button>
+            </form>
 
-        </form>
+
+
+            <?php else: ?>
+
+                <p class="fs-4 fw-bold text-center">Sorry! No Questions Found this Survey</p>
+
+            <?php endif ?>
+
 
     <?php else : ?>
 

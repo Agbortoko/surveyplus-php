@@ -17,8 +17,11 @@ function debug_array(array $arrayToDebug, bool $multi = false)
             echo "<pre> <code>";
             print_r($array);
             echo "</pre> </code>";
+            echo "-----------------------";
+            echo "<br>";
             
         }
+        echo strtoupper("<p> Under Development </p>");
         exit(0); // stops the script from loading below
     }
 

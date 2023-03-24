@@ -57,5 +57,5 @@ if (isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    debug_array([$checkboxes, $radios, $textfields], true);
+    debug_array([$checkboxes, $radios, $textfields, $_POST], true);
 }
