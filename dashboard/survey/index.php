@@ -113,8 +113,7 @@ $pageTitle = "All Surveys"; ?>
                                                 </td>
                                                 <td><?= $survey["expiresOn"] ?></td>
                                                 <td>
-                                                    <a class="btn btn-warning btn-sm" href="<?= survey($_SESSION["handle"], $survey["id"], $survey["name"], $_SESSION["profile_id"]); ?>" target="_b
-                                                    ">Link</a>
+                                                    <a class="btn btn-warning btn-sm" href="<?= survey($_SESSION["handle"], $survey["id"], $survey["name"], $_SESSION["profile_id"]); ?>" target="_blank">Link</a>
                                                 </td>
 
                                                 <td>

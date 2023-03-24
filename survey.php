@@ -55,6 +55,9 @@ use Surveyplus\App\Controllers\QuestionController;
 
         <form action="<?= base_url("includes/survey/submit.inc.php") ?>" method="POST">
 
+        <input type="hidden" value="<?= $survey_id ?>" name="survey_id">
+        <input type="hidden" value="<?= $profile_id?>" name="profile_id">
+
             <?php foreach ($all_survey_questions as $question) : ?>
 
                 <?php $count_question++ ?>
@@ -71,7 +74,7 @@ use Surveyplus\App\Controllers\QuestionController;
                         <?php if (isset($description) && !empty($description)) : ?>
                             <?php foreach ($description as $label) : ?>
 
-                                <div class="container p-0 my-2">
+                                <div class="form-check">
                                     <input type="radio" name="<?= "radio_" . $question["id"] ?>" class="form-check-input border border-1 border-primary" value="<?= $label ?>">
                                     <label class="ms-2 fw-bold form-check-label"  for="<?= "radio_" . $question["id"] ?>"><?= $label ?></label>
                                 </div>
@@ -98,7 +101,7 @@ use Surveyplus\App\Controllers\QuestionController;
 
                             <?php foreach ($description as $label) : ?>
 
-                                <div class="container p-0 my-2">
+                                <div class="form-check">
                                     <input type="checkbox" name="<?= "checkbox_" . $question["id"] . "[]" ?>" class="form-check-input border border-1 border-primary"  value="<?= $label ?>">
                                     <label class="ms-2 fw-bold form-check-label" for="<?= "checkbox_" . $question["id"] ?>"><?= $label ?></label>
                                 </div>
