@@ -13,7 +13,7 @@ htaccess files (or "distributed configuration files") provide a way to make conf
 
 ## Read Later to understand more about CSRF tokens
 
-[PHP csrf](https://www.phptutorial.net/php-tutorial/php-csrf/)
+[PHP CSRF](https://www.phptutorial.net/php-tutorial/php-csrf/)
 
 #### What is CSRF?
 

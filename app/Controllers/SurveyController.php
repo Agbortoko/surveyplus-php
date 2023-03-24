@@ -25,6 +25,12 @@ class SurveyController
         return $this->surveys->get(null, $user_id, null, $limit);
     }
 
+
+    public function show_view(int $survey_id, bool $published , int $profile_id) : array|bool
+    {
+        return $this->surveys->get_for_view($survey_id, $published, $profile_id);
+    }
+
     /**
      * Show Users for specific condition
      *

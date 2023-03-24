@@ -59,6 +59,29 @@ final class Surveys extends BaseModel
         return $surveys;
     }
 
+
+    /**
+     * Get survey and show to the survey taker
+     *
+     * @param integer $survey_id
+     * @param boolean $published
+     * @param integer $profile_id
+     * @return array|false
+     */
+    public function get_for_view(int $survey_id, bool $published , int $profile_id) : array | bool
+    
+    {
+        $is_published = ($published == true) ? $published = 1 : $published = 0;
+        $surveys = $this->select("SELECT * FROM $this->table WHERE id = $survey_id AND profile_id = $profile_id AND published = $is_published ORDER BY id DESC")->findAll();
+
+        foreach($surveys as $survey){
+            return $survey; // Return single survey incase id paramater is set
+        }
+
+        return false;
+    }
+
+
     public function save(array $data)
     {
         

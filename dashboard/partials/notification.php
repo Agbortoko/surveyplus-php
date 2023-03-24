@@ -86,6 +86,14 @@
                 <p class="mb-0 fs-3 fw-bold text-center">Survey has questions, so it cannot be deleted! </p>
             <?php endif ?>
 
+            <?php if ($_GET['error'] == "invalidlink" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Invalid Survey link </p>
+            <?php endif ?>
+
+            <?php if ($_GET['error'] == "notpublished" && $_GET['type'] == "survey") : ?>
+                <p class="mb-0 fs-3 fw-bold text-center">Survey has not yet been published</p>
+            <?php endif ?>
+
             <?php if ($_GET['error'] == "savefailed" && $_GET['type'] == "question") : ?>
                 <p class="mb-0 fs-3 fw-bold text-center">Question Not Saved!</p>
             <?php endif ?>
