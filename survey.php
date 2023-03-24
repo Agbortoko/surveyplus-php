@@ -1,5 +1,9 @@
 <?php require "vendor/autoload.php"; ?>
-<?php use Surveyplus\App\Controllers\SurveyController; ?>
+<?php 
+
+    use Surveyplus\App\Controllers\SurveyController;
+    use Surveyplus\App\Controllers\QuestionController;
+?>
 <?php session_start(); ?>
 
 
@@ -11,6 +15,7 @@
     $profile_id = $_GET["profile"];
 
     $surveys = new SurveyController();
+    $questions = new QuestionController();
 
     // Check if survey is published
     $published = $surveys->is_published($survey_id);
@@ -32,8 +37,18 @@
 
     $survey = $surveys->show_view($survey_id, true, $profile_id);
 
-    debug_array($survey);
+    $all_survey_questions = $questions->show_survey_single_question($profile_id, $survey_id);
+
+    debug_array($all_survey_questions);
 ?>
+
+
+<?php foreach($all_survey_questions as $question): ?>
+
+        
+
+<?php endforeach ?>
+
 
 
 <?php else: ?>

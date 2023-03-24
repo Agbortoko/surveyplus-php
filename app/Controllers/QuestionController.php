@@ -37,6 +37,11 @@ class QuestionController
         return $this->questions->join($profile_id);
     }
 
+    public function show_survey_single_question(int $profile_id, int $survey_id) : array
+    {
+        return $this->questions->join($profile_id, $survey_id);
+    }
+
 
     public function create(array $data)
     {

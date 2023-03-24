@@ -77,14 +77,42 @@ final class Questions extends BaseModel
      * Find all questions for survey created by a user
      *
      * @param integer $user_id
+     * @param integer $survey_id
      * @return array $questions
      */
-    public function join(int $profile_id)
+    public function join(int $profile_id, int $survey_id = null)
     {
+
+        if($survey_id != null){
+
+            $questions = $this->select("SELECT 
+                    q.id as id, 
+                    q.name as name, 
+                    q.createdOn as createdOn, 
+                    q.description as description,
+                    s.id as survey_id, 
+                    s.name as survey_name, 
+                    s.published as survey_published,
+                    ac.name as answer_type,
+                    ac.id as answer_type_id
+                FROM $this->table q 
+                JOIN survey s 
+                    ON q.survey_id = s.id 
+                JOIN answer_category ac 
+                    ON q.answer_category_id = ac.id 
+                WHERE s.profile_id = $profile_id AND
+                      q.survey_id = $survey_id
+                    ORDER BY q.id DESC")->findAll();
+
+                return $questions;
+        }
+
+
         $questions = $this->select("SELECT 
                 q.id as id, 
                 q.name as name, 
                 q.createdOn as createdOn, 
+                q.description as description,
                 s.id as survey_id, 
                 s.name as survey_name, 
                 s.published as survey_published,
