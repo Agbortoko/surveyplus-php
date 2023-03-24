@@ -102,7 +102,7 @@ final class Questions extends BaseModel
                     ON q.answer_category_id = ac.id 
                 WHERE s.profile_id = $profile_id AND
                       q.survey_id = $survey_id
-                    ORDER BY q.id DESC")->findAll();
+                    ORDER BY q.id ASC")->findAll();
 
                 return $questions;
         }
