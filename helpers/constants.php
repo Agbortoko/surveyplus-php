@@ -1,13 +1,16 @@
 <?php
 
+use Surveyplus\App\Config\App;
+
+
 /** @var BASE_PATH The root absolute path of this project*/
 define("BASE_PATH", dirname(__DIR__, 1));
 
 /** @var BASE_URL The base url of this project */
-define("BASE_URL", "http://localhost/surveyplusweb");
+define("BASE_URL", App::getBaseUrl());
 
 /** @var BASE_URL_SEGMENT The base url path. Online this can be set to "" */
-define("BASE_URL_SEGMENT", "surveyplusweb");
+define("BASE_URL_SEGMENT", App::getBaseUrl());
 
 /** @var DASHBOARD_URL The dashboard url of this project */
 define("DASHBOARD_URL", BASE_URL . "/dashboard");
@@ -18,6 +21,7 @@ define("DASHBOARD_PATH", BASE_PATH . "/dashboard");
 /** @var APP_PATH The path to the app folder of this project */
 const APP_PATH = BASE_PATH . "/app";
 
-const SENDER_EMAIL_ADDRESS = "no-reply@email.com";
+define("SENDER_EMAIL_ADDRESS",  App::getSenderEmail());
+
 
 
