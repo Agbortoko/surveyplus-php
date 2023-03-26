@@ -10,7 +10,7 @@ define("BASE_PATH", dirname(__DIR__, 1));
 define("BASE_URL", App::getBaseUrl());
 
 /** @var BASE_URL_SEGMENT The base url path. Online this can be set to "" */
-define("BASE_URL_SEGMENT", App::getBaseUrl());
+define("BASE_URL_SEGMENT", App::getBaseUrlSegment());
 
 /** @var DASHBOARD_URL The dashboard url of this project */
 define("DASHBOARD_URL", BASE_URL . "/dashboard");
