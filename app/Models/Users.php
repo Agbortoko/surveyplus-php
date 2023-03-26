@@ -11,7 +11,7 @@ final class Users extends BaseModel
 
     public function get() 
     {
-        $users = $this->select("SELECT *  FROM $this->table ORDER BY id DESC")->findAll();
+        $users = $this->select("SELECT id, email, createdOn  FROM $this->table ORDER BY id DESC")->findAll();
         return $users;
     }
 

@@ -98,5 +98,17 @@ class SurveyController
         return false;
     }
 
+    public function getSurveyStatistics()
+    {
+        $stats = $this->surveys->surveyStats();
+
+        if(count($stats) > 0)
+        {
+            return $stats;
+        }
+
+        return false;
+    }
+
 
 }

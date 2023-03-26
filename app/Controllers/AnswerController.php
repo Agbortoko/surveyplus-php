@@ -27,4 +27,18 @@ class AnswerController
     }
 
 
+    public function showAll(int $profileID)
+    {
+        $answers = $this->answers->getProfileAnswers($profileID);
+
+        if(count($answers) > 0)
+        {
+            return $answers;
+        }
+
+        return false;
+
+    }
+
+
 }

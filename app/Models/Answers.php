@@ -8,6 +8,9 @@ class Answers extends BaseModel
 
     public string $table = "answer";
 
+
+
+
     public function save(array $data, int $surveyTaker)
     {
 
@@ -45,6 +48,14 @@ class Answers extends BaseModel
 
         return $lastID;
     }
+
+
+    public function getProfileAnswers(int $profile_id) 
+    {
+        $answers = $this->select("SELECT  a.id as answer_id, q.id as question_id, s.profile_id as profile  FROM $this->table a JOIN question q ON a.question_id = q.id JOIN survey s ON q.survey_id = s.id WHERE s.profile_id = $profile_id  ORDER BY a.id DESC")->findAll();
+        return $answers;
+    }
+
 
 
 }
