@@ -75,6 +75,8 @@ Changed survey `user_id` field name to `profile_id` ✔️
 
 Changed the table structure for answer table, name to description
 
+  // $previous = $_SERVER['HTTP_REFERER'];, this can be used to go back
+
 
 ## Code consitency
 Trying to make code a little more consistent! to avoid mixups. Making points to make modifications later.

@@ -17,19 +17,14 @@ class AnswerController
      * Add answer to the database
      *
      * @param array $data
-     * @return boolean
+     * @return int The last Insert ID
      */
-    public function create(array $data) : bool
+    public function create(array $data, int $surveyTaker)
     {
+       $insert = $this->answers->save($data, $surveyTaker);
 
-        $save = $this->answers->save($data);
-
-        if(!$save){
-            return false;
-        }
-
-        return true;
-
+       return $insert;
     }
+
 
 }

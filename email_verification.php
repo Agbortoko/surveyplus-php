@@ -1,60 +1,60 @@
-<?php $pageTitle = "Home"; ?>
-
-<?php require "partials/header.php" ?>
-
-
 <?php
 
+require "./vendor/autoload.php";
+
+
 use Surveyplus\App\Middleware\CheckLoggedInUser;
-$guestOnly = new CheckLoggedInUser();
-$guestOnly->guestOnly();
+use Surveyplus\App\Controllers\SurveyTakerController;
 
-?>
+session_start();
 
-<?php require "partials/navigation.php" ?>
+if (!isset($_GET["survey"]) && !isset($_GET["email"]) && !isset($_GET["code"])) {
+    $query = http_build_query(["error" => "emailverificationinvalid"]);
 
-
-<main class="container h-screen d-flex justify-content-center align-items-center">
-
-    <?php if(!isset($_GET["error"])): ?>
-
-        <?php require "partials/notification.php"?>
-        
-
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-lg-5 mx-auto">
-                    <div class="card rounded-0 border border-1 border-primary">
-            
-                    <div class="card-header">
-                        <h3 class="text-center"><span class="fw-bold">survey+</span> Email Verification</h3>
-                    </div>
-
-                    <div class="card-body text-center py-4">
-
-                        <h4>Hello!</h4>
-
-                        <a href="#" class="btn btn-primary btn-lg rounded-0 text-center text-white">Click to Your Verify Email Address</a>
-
-                        <p class="mb-0 mt-3">Verify your email address to validate your survey submission</p>
-
-                    </div>
-            
-            
-                    </div>
-
-                </div>
-            </div>
+    header("Location: " . base_url("?") . $query);
+    exit(0);
+} else {
 
 
-        </div>
+    $guestOnly = new CheckLoggedInUser();
+    $guestOnly->guestOnly();
 
-    <?php endif ?>
+    $email = $_GET["email"];
+    $survey = $_GET["survey"];
+    $code = $_GET["code"];
 
 
-</main>
+    $profileID = $_GET["profile"];
+    $handle = $_GET["handle"];
+    $slug = $_GET["slug"];
+
+    $surveyTaker = new SurveyTakerController();
+
+    $verificationCode = $surveyTaker->getActivationCode($email);
 
 
-<?php require "partials/footer.php" ?>
+    if ($code != $verificationCode) {
+        $query = http_build_query(["survey" => $survey,  "profile" => $profileID, "handle" => $handle, "slug" => $slug,  "error" => "invalidcode"]);
+        header('Location: ' . base_url("check_email.php") . "?" . $query);
+        exit(0);
+    }
+
+    $data = [
+        "email_verification" => 1
+    ];
+
+    $updateEmailVerification = $surveyTaker->updateVerification($data, $email);
+
+    if (!$updateEmailVerification) {
+        $query = http_build_query(["survey" => $survey,  "profile" => $profileID, "handle" => $handle, "slug" => $slug,  "error" => "unexpectederror"]);
+        header('Location: ' . base_url("check_email.php") . "?" . $query);
+        exit(0);
+    }
+
+    // Set survey taker in session
+    $_SESSION["survey_taker"] = $email;
+
+    $query = http_build_query(["survey" => $survey,  "profile" => $profileID, "handle" => $handle, "slug" => $slug,  "success" => "emailverified"]);
+    header('Location: ' . base_url("check_email.php") . "?" . $query);
+    exit(0);
+}

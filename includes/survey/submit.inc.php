@@ -3,40 +3,31 @@
 require "../../vendor/autoload.php";
 
 use Surveyplus\App\Controllers\QuestionController;
-use Surveyplus\App\Controllers\SurveyController;
+use Surveyplus\App\Controllers\AnswerController;
+use Surveyplus\App\Controllers\SurveyTakerController;
 
 session_start();
 
 if (isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST") {
 
+
+
     $questions = new QuestionController();
+    $answers = new AnswerController();
+    $surveryTaker = new SurveyTakerController();
 
     // debug_array($_POST);
 
-    $email = clean_input($_POST["email"]);
+
     $comment = isset($_POST["comment"]) ? clean_input($_POST["comment"]) : "";
     $survey_id = $_POST["survey_id"];
     $profile_id = $_POST["profile_id"];
+    $handle = $_POST["handle"];
+    $slug = $_POST["slug"];
+
+    $email = $_SESSION["survey_taker"];
 
 
-    if(!isset($email) || empty($email)){
-        // redirect back if email not found or go back to homepage
-        if(isset($_SERVER['HTTP_REFERER'])) {
-
-            $previous = $_SERVER['HTTP_REFERER'];
-
-            header('Location: ' . $previous);
-            exit(0);
-
-
-        }else{
-            header('Location: ' . base_url());
-            exit(0);
-
-        }
-        
-        // header("Location: " . base_url("email_verification.php?error=null&type=email"));
-    }
 
     // Empty arrays to hold values below
     $checkboxes = [];
@@ -44,6 +35,8 @@ if (isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST") {
     $textfields = [];
 
     $question_answers = [];
+
+    $allSurveyTakerAnswers = [];
 
     $all_survey_questions = $questions->show_survey_single_question($profile_id, $survey_id);
 
@@ -67,7 +60,6 @@ if (isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST") {
                 $question_answers[$question["id"]]["answer"][$radioUnique] =  $radios[$radioUnique];
 
                 $question_answers[$question["id"]]["answer_type"] = $question["answer_type_id"];
-                $question_answers[$question["id"]]["question"] = $question["id"];
             }
         }
 
@@ -82,7 +74,6 @@ if (isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST") {
                 $question_answers[$question["id"]]["answer"][$checkBoxUnique] = $checkboxes[$checkBoxUnique];
 
                 $question_answers[$question["id"]]["answer_type"] = $question["answer_type_id"];
-                $question_answers[$question["id"]]["question"] = $question["id"];
             }
         }
 
@@ -98,20 +89,40 @@ if (isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST") {
                 $question_answers[$question["id"]]["answer"][$textFieldUnique] =  $textfields[$textFieldUnique] = $_POST[$textFieldUnique];
 
                 $question_answers[$question["id"]]["answer_type"] = $question["answer_type_id"];
-                $question_answers[$question["id"]]["question"] = $question["id"];
             }
         }
     }
 
 
-    // Save to database answers
-    // Verify survey taker email and save in database
-    // Save to survey taker answer
 
 
 
+    // Get use with email saved in session
 
-    debug_array([$question_answers, $_POST], true);
+    $currentSurveyTaker = $surveryTaker->getSurveyTakerID($email);
+
+    foreach ($currentSurveyTaker as $surveyTakerItem) {
+        $surveryTakerID = $surveyTakerItem["id"];
+    }
+
+    // Save survey answer
+    $saveAnswer = $answers->create($question_answers, $surveryTakerID);
+
+
+    // Check if answer is not saved
+    if (!$saveAnswer) {
+        $query = http_build_query(["handle" => $handle, "id" => $survey_id, "profile" => $profile_id, "slug" => $slug, "error" => "unexpectederror"]);
+
+        header('Location: ' . base_url("survey.php") . "?" . $query);
+        exit(0);
+    }
+
+    // Redirect to homepage if sucessful
+    header('Location: ' . BASE_URL . "/index.php?success=surveysubmitted");
+    exit(0);
+
+
+    // debug_array([$question_answers, $_POST], true);
 } else {
 
     header("Location:" . base_url());

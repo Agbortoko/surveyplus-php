@@ -2,7 +2,7 @@
 <?php
     $check = new Surveyplus\App\Middleware\CheckLoggedInUser();
     $check->userOnly();
-    $check->create_profile();
+    $check->createProfile();
 ?>
 <!DOCTYPE html>
 <html lang="en">

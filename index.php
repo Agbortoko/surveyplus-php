@@ -8,10 +8,12 @@
 <main>
 
     <section class="hero mt-5 p-5 px-lg-0 py-lg-5">
-
+    
+        
         <div class="container">
+            <?php require "partials/notification.php"?>
 
-            <div class="row align-items-center">
+            <div class="row align-items-center mt-4">
 
                 <div class="col-lg-7">
                     <img src="<?= base_url('images/undraw_survey.svg') ?>" class="img-fluid" alt="Surveyplus survey">

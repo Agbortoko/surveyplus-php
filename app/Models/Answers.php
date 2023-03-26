@@ -8,25 +8,43 @@ class Answers extends BaseModel
 
     public string $table = "answer";
 
-
-    public function save(array $data)
+    public function save(array $data, int $surveyTaker)
     {
 
-        $this->stmt = $this->conn->prepare("INSERT INTO $this->table (description, answer_category_id) VALUES (:description, :answer_category_id)");
+        $this->stmt = $this->conn->prepare("INSERT INTO $this->table (description, answer_category_id, question_id, survey_taker_id) VALUES (:description, :answer_category_id, :question_id, :survey_taker_id)");
 
-        // Bind parameters to prepared indicators
-        $this->stmt->bindParam(":description", $data["description"]);
-        $this->stmt->bindParam(":answer_category_id", $data["answer_category_id"]);
+        // Loop through and bind parameters to prepared indicators
 
-        if(!$this->stmt->execute())
-        {
-             return false;
+        foreach ($data as $key => $value) {
+
+            // count the number of values encpde tje value answer and bind
+        
+            for($i = 0 ; $i <= count($value) ; $i++)
+            {
+
+                $answerToSave = json_encode($value["answer"]);
+    
+                $this->stmt->bindParam(":description", $answerToSave);
+                $this->stmt->bindParam(":answer_category_id", $value["answer_type"]);
+                $this->stmt->bindParam(":question_id", $key);
+                $this->stmt->bindParam(":survey_taker_id", $surveyTaker);
+
+                // executing here will make it add more than needed
+            }
+            
+            // execute for each existing value bind above
+            $execute = $this->stmt->execute();
         }
 
-        return true;
 
+        if (!$execute) {
+            return false;
+        }
+
+        $lastID =  $this->conn->lastInsertId();
+
+        return $lastID;
     }
-    
 
 
 }

@@ -17,3 +17,7 @@ define("DASHBOARD_PATH", BASE_PATH . "/dashboard");
 
 /** @var APP_PATH The path to the app folder of this project */
 const APP_PATH = BASE_PATH . "/app";
+
+const SENDER_EMAIL_ADDRESS = "no-reply@email.com";
+
+

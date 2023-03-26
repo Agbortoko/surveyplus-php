@@ -46,7 +46,7 @@ final class CheckLoggedInUser
      *
      * @return redirect Redirect to the create profile page
      */
-    public function create_profile()
+    public function createProfile()
     {
         $numberOfProfiles = count($this->profiles->find_all($_SESSION['user_id']));
         
