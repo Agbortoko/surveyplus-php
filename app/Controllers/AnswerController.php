@@ -41,4 +41,17 @@ class AnswerController
     }
 
 
+    public function getAnswerStatistics()
+    {
+        $stats = $this->answers->answerStats();
+
+        if(count($stats) > 0)
+        {
+            return $stats;
+        }
+
+        return false;
+    }
+
+
 }

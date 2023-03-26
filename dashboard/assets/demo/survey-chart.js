@@ -1,75 +1,70 @@
-function getData(url, calback){
+function getData(url, calback) {
   fetch(url)
     .then((response) => response.json())
     .then((result) => calback(result));
-}               
+}
 
 getData("../api/surveys/index.php", (data) => {
+  // Set new default font family and font color to mimic Bootstrap's default styling
+  Chart.defaults.global.defaultFontFamily =
+    '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+  Chart.defaults.global.defaultFontColor = "#292b2c";
 
+  // Bar Chart Example
+  var ctx = document.getElementById("surveyBarChart");
 
-// Set new default font family and font color to mimic Bootstrap's default styling
-Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#292b2c';
+  let statLabels = [];
+  let statData = [];
 
-// Bar Chart Example
-var ctx = document.getElementById("surveyBarChart");
+  data.forEach((dataItem) => {
+    statLabels.push(dataItem.days);
+    statData.push(dataItem.surveys);
+  });
 
-
-let statLabels = [];
-let statData = [];
-
-data.forEach((dataItem) => {
-  
-  statLabels.push(dataItem.days);
-  statData.push(dataItem.surveys);
-});
-
-
-
-    var myLineChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: statLabels,
-        datasets: [{
+  var myLineChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: statLabels,
+      datasets: [
+        {
           label: "Surveys",
-          backgroundColor: "rgba(2,117,216,1)",
+          backgroundColor: "rgb(228, 163, 11)",
           borderColor: "rgba(2,117,216,1)",
           data: statData,
-        }],
-      },
-      options: {
-        scales: {
-          xAxes: [{
+        },
+      ],
+    },
+    options: {
+      scales: {
+        xAxes: [
+          {
             time: {
-              unit: 'days'
+              unit: "days",
             },
             gridLines: {
-              display: true
+              display: true,
             },
             ticks: {
-              maxTicksLimit: 6
-            }
-          }],
-          yAxes: [{
+              maxTicksLimit: 6,
+            },
+          },
+        ],
+        yAxes: [
+          {
             ticks: {
               min: 0,
               max: 10,
-              maxTicksLimit: 20
+              maxTicksLimit: 20,
             },
             gridLines: {
-              display: true
-            }
-          }],
-        },
-        legend: {
-          display: false
-        }
-      }
-    });
-
-  
-
-
-
-
+              display: true,
+            },
+          },
+        ],
+      },
+      legend: {
+        display: false,
+      },
+    },
+  });
 });
