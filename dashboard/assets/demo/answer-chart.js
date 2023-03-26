@@ -19,7 +19,7 @@ getData("../api/answers/index.php", (data) => {
   let statData = [];
 
   data.forEach((dataItem) => {
-    statLabels.push(dataItem.days);
+    statLabels.push(dataItem.month);
     statData.push(dataItem.answers);
   });
 

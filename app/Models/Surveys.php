@@ -154,7 +154,7 @@ final class Surveys extends BaseModel
 
     public function surveyStats()
     {
-        $surveysData = $this->select("SELECT COUNT(id) as surveys , DAYNAME(createdOn) as days FROM $this->table WHERE published = 1 GROUP BY days ORDER BY id ASC")->findAll(); 
+        $surveysData = $this->select("SELECT COUNT(id) as surveys , MONTHNAME(createdOn) as month FROM $this->table WHERE published = 1 GROUP BY month ORDER BY id ASC")->findAll(); 
         return $surveysData;
 
     }

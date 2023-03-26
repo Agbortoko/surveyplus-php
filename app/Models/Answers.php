@@ -59,7 +59,7 @@ class Answers extends BaseModel
 
     public function answerStats()
     {
-        $answerData = $this->select("SELECT COUNT(id) as answers , DAYNAME(createdOn) as days FROM $this->table WHERE survey_taker_id IS NOT NULL GROUP BY days ORDER BY id ASC")->findAll(); 
+        $answerData = $this->select("SELECT COUNT(id) as answers , MONTHNAME(createdOn) as month FROM $this->table WHERE survey_taker_id IS NOT NULL GROUP BY month ORDER BY id ASC")->findAll(); 
         return $answerData;
 
     }

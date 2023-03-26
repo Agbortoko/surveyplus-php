@@ -10,6 +10,7 @@ getData("../api/surveys/index.php", (data) => {
     '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
   Chart.defaults.global.defaultFontColor = "#292b2c";
 
+
   // Bar Chart Example
   var ctx = document.getElementById("surveyBarChart");
 
@@ -17,7 +18,7 @@ getData("../api/surveys/index.php", (data) => {
   let statData = [];
 
   data.forEach((dataItem) => {
-    statLabels.push(dataItem.days);
+    statLabels.push(dataItem.month);
     statData.push(dataItem.surveys);
   });
 
@@ -39,7 +40,7 @@ getData("../api/surveys/index.php", (data) => {
         xAxes: [
           {
             time: {
-              unit: "days",
+              unit: "months",
             },
             gridLines: {
               display: true,
