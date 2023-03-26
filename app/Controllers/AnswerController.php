@@ -41,8 +41,20 @@ class AnswerController
     }
 
 
-    public function getAnswerStatistics()
+    public function getAnswerStatistics(int $profileID = null)
     {
+
+        if($profileID != null)
+        {
+
+            $stats = $this->answers->profileAnswerStats($profileID);
+    
+            if(count($stats) > 0)
+            {
+                return $stats;
+            }
+        }
+
         $stats = $this->answers->answerStats();
 
         if(count($stats) > 0)

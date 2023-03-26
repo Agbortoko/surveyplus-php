@@ -38,17 +38,25 @@
                                 <a href="<?= BASE_URL ?>" class="nav-link fs-4">Home</a>
                             </li>
 
+                            
                             <li class="nav-item">
                                 <a href="#" class="nav-link fs-4">About</a>
                             </li>
-
+                            
                             <li class="nav-item">
                                 <a href="#" class="nav-link fs-4">Features</a>
                             </li>
 
+
                             <li class="nav-item">
                                 <a href="#" class="nav-link fs-4">Explore</a>
                             </li>
+
+                            <li class="nav-item">
+                            <a href="<?= base_url("mini_api.php") ?>" class="nav-link fs-4 <?= url_is(BASE_URL_SEGMENT . "/mini_api.php") ? "active" : "" ?>">API</a>
+                            </li>
+
+
 
 
                         </ul>
@@ -89,10 +97,11 @@
 
             <nav class="primary_menu__nav d-flex justify-content-around">
 
-                <a href="<?= BASE_URL ?>" class="fs-5 text-decoration-none text-dark <?= url_is("surveyplusweb") ? "active" : "" ?>">Home</a>
+                <a href="<?= BASE_URL ?>" class="fs-5 text-decoration-none text-dark <?= url_is(BASE_URL_SEGMENT) ? "active" : "" ?>">Home</a>
                 <a href="#" class="fs-5 text-decoration-none text-dark">About</a>
                 <a href="#" class="fs-5 text-decoration-none text-dark">Features</a>
                 <a href="#" class="fs-5 text-decoration-none text-dark">Explore</a>
+                <a href="<?= base_url("mini_api.php") ?>" class="fs-5 text-decoration-none text-dark  <?= url_is(BASE_URL_SEGMENT . "/mini_api.php") ? "active" : "" ?>">API</a>
 
             </nav>
 

@@ -159,6 +159,15 @@ final class Surveys extends BaseModel
 
     }
 
+    public function profileSurveyStats(int $profile_id)
+    {
+        $surveysData = $this->select("SELECT COUNT(id) as surveys , MONTHNAME(createdOn) as month FROM $this->table WHERE published = 1 AND profile_id = $profile_id GROUP BY month ORDER BY id ASC")->findAll(); 
+        return $surveysData;
+
+    }
+
+    
+
 
 
 }  

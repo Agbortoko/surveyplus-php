@@ -4,7 +4,7 @@ function getData(url, calback) {
     .then((result) => calback(result));
 }
 
-getData("../api/answers/index.php", (data) => {
+getData("../api/answers/profile.php", (data) => {
   // Set new default font family and font color to mimic Bootstrap's default styling
   Chart.defaults.global.defaultFontFamily =
     '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';

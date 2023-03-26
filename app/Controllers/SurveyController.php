@@ -98,8 +98,20 @@ class SurveyController
         return false;
     }
 
-    public function getSurveyStatistics()
+    public function getSurveyStatistics(int $profileID = null)
     {
+
+        if($profileID != null)
+        {
+            $stats = $this->surveys->profileSurveyStats($profileID);
+    
+            if(count($stats) > 0)
+            {
+                return $stats;
+            }
+        }
+
+
         $stats = $this->surveys->surveyStats();
 
         if(count($stats) > 0)

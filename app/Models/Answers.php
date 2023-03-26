@@ -65,5 +65,12 @@ class Answers extends BaseModel
     }
 
 
+    public function profileAnswerStats(int $profile_id) 
+    {
+        $answers = $this->select("SELECT  COUNT(a.id) as answers, MONTHNAME(a.createdOn) as month FROM $this->table a JOIN question q ON a.question_id = q.id JOIN survey s ON q.survey_id = s.id WHERE s.profile_id = $profile_id GROUP BY month  ORDER BY a.id DESC")->findAll();
+        return $answers;
+    }
+
+
 
 }

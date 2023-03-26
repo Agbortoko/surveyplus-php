@@ -122,7 +122,7 @@ use Surveyplus\App\Controllers\AnswerController;
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-chart-area me-1"></i>
-                                   Monthly Survey Creations <span class="badge bg-primary"><?= date("Y") ?></span>
+                                   Monthly Published Survey <span class="badge bg-primary"><?= date("Y") ?></span>
                                 </div>
                                 <div class="card-body"><canvas id="surveyBarChart" width="100%" height="40"></canvas></div>
                             </div>
