@@ -117,6 +117,13 @@ if (isset($_POST) && $_SERVER["REQUEST_METHOD"] == "POST") {
         exit(0);
     }
 
+
+    // unset the survey taker
+
+    session_unset();
+    $_SESSION['survey_taker'] = null;
+    session_destroy();
+
     // Redirect to homepage if sucessful
     header('Location: ' . BASE_URL . "/index.php?success=surveysubmitted");
     exit(0);
