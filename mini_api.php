@@ -22,15 +22,11 @@
 
                 <h3 class="text-center fw-bolder">List of available requests</h3>
 
-                <ul class="mt-4">
+                <ul class="mt-4 fs-5">
                     <li><kbd><?= base_url("api/users/") ?></kbd> - All Users - <kbd class="bg-success">GET</kbd></li>
 
                     <li class="mt-4">
                         <kbd><?= base_url("api/surveys/") ?></kbd> - Published Surveys / Month - <kbd class="bg-success">GET</kbd>
-                    </li>
-
-                    <li class="mt-4">
-                        <kbd><?= base_url("api/answers/") ?></kbd> - Answers / Month - <kbd class="bg-success">GET</kbd>
                     </li>
 
                 </ul>
