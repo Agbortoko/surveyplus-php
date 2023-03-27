@@ -78,25 +78,5 @@ Changed the table structure for answer table, name to description
   // $previous = $_SERVER['HTTP_REFERER'];, this can be used to go back
 
 
-## Code consitency
-Trying to make code a little more consistent! to avoid mixups. Making points to make modifications later.
-
-###  Prefered case for functions methods
-camelCase => getUser
-
-###  Prefered case for classes
-Pascal Case => UserController
-
-###  Prefered case for variables, parameters, properties
-
-camelCase, for words like ID i can capitalize.
-
-###  Models methods
-
- -> get(int $uniqueID) -> Gets specific data from database table, returns an array of the value you requested. Will take parameters
-
- -> getAll() -> Gets all data from database table.
-
-
-### Controller methods
+Changed the survey table description constraint from VARCHAR(45) to TEXT
 

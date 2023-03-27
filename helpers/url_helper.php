@@ -82,6 +82,17 @@ if(!function_exists("survey"))
 }
 
 
+if(!function_exists("paginateSurvey"))
+{
+    function paginateSurvey(string $handle, int $survey_id, string $name, int $profile_id, int $page)
+    {
+        $query = http_build_query(["handle" => $handle, "id" => $survey_id, "profile" => $profile_id, "slug" => strtolower(str_replace(" ", "-", $name)),  "page" => $page]);
+
+        return base_url("survey.php?") . $query;
+    }
+}
+
+
 
 
 

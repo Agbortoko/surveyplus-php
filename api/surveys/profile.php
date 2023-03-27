@@ -21,14 +21,17 @@ if(!isset($_SESSION["profile_id"]))
 $surveys = new SurveyController();
 $profileID = $_SESSION["profile_id"];
 
-$allSurveys = $surveys->getSurveyStatistics($profileID);
+$allSurveys = $surveys->getSurveyStatisticsForProfile($profileID);
 
 
 // debug_array($allSurveys);
 
-if($allSurveys){
+if(is_array($allSurveys) && count($allSurveys) > 0){
 
     echo json_encode($allSurveys);
+
+}else{
+    echo json_encode([]); // set an empty array
 }
 
 

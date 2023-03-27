@@ -23,13 +23,15 @@ use Surveyplus\App\Controllers\AnswerController;
     $answers = new AnswerController();
     $profileID = $_SESSION["profile_id"];
     
-    $allAnswers = $answers->getAnswerStatistics($profileID);
+    $allAnswers = $answers->getAnswerStatisticsForProfile($profileID);
     
     // debug_array($allAnswers);
     
-    if($allAnswers){
+    if(is_array($allAnswers) && count($allAnswers) > 0){
     
         echo json_encode($allAnswers);
+    }else{
+        echo json_encode([]); // set an empty array
     }
     
     

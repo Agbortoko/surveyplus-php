@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 namespace Surveyplus\App\Controllers;
+
 use Surveyplus\App\Models\Answers;
 
 class AnswerController
@@ -21,9 +22,9 @@ class AnswerController
      */
     public function create(array $data, int $surveyTaker)
     {
-       $insert = $this->answers->save($data, $surveyTaker);
+        $insert = $this->answers->save($data, $surveyTaker);
 
-       return $insert;
+        return $insert;
     }
 
 
@@ -31,34 +32,19 @@ class AnswerController
     {
         $answers = $this->answers->getProfileAnswers($profileID);
 
-        if(count($answers) > 0)
-        {
+        if (count($answers) > 0) {
             return $answers;
         }
 
         return false;
-
     }
 
 
     public function getAnswerStatistics(int $profileID = null)
     {
-
-        if($profileID != null)
-        {
-
-            $stats = $this->answers->profileAnswerStats($profileID);
-    
-            if(count($stats) > 0)
-            {
-                return $stats;
-            }
-        }
-
         $stats = $this->answers->answerStats();
 
-        if(count($stats) > 0)
-        {
+        if (count($stats) > 0) {
             return $stats;
         }
 
@@ -66,4 +52,15 @@ class AnswerController
     }
 
 
+
+    public function getAnswerStatisticsForProfile(int $profileID)
+    {
+        $stats = $this->answers->profileAnswerStats($profileID);
+
+        if (count($stats) > 0) {
+            return $stats;
+        }
+
+        return false;
+    }
 }

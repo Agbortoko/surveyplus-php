@@ -1,4 +1,4 @@
-<?php $pageTitle = "Mini API"; ?>
+<?php $pageTitle = "Mini REST API"; ?>
 
 <?php require "partials/header.php" ?>
 
@@ -11,7 +11,7 @@
 
     <div class="container">
 
-        <h2 class="text-center fw-bolder">Mini Rest API for survey+</h2>
+        <h2 class="text-center fw-bolder">Mini REST API for survey+</h2>
 
         <p class="text-center">Incase you want to get some data from survey+</p>
 
@@ -23,10 +23,10 @@
                 <h3 class="text-center fw-bolder">List of available requests</h3>
 
                 <ul class="mt-4 fs-5">
-                    <li><kbd><?= base_url("api/users/") ?></kbd> - All Users - <kbd class="bg-success">GET</kbd></li>
+                    <li><kbd><?= base_url("api/users/") ?></kbd> - All Existing Users - <kbd class="bg-success">GET</kbd></li>
 
                     <li class="mt-4">
-                        <kbd><?= base_url("api/surveys/") ?></kbd> - Published Surveys / Month - <kbd class="bg-success">GET</kbd>
+                        <kbd><?= base_url("api/surveys/") ?></kbd> - All Published Surveys / Month - <kbd class="bg-success">GET</kbd>
                     </li>
 
                 </ul>

@@ -33,13 +33,13 @@
                         
                     <?php if (!isset($_SESSION['user_id'])) : ?>
 
-                        <a href="<?= BASE_URL . "/signup.php" ?>" class="btn btn-primary text-white rounded-0">Sign Up For Free</a>
+                        <a href="<?= base_url("signup.php") ?>" class="btn btn-primary text-white rounded-0">Sign Up For Free</a>
 
-                        <a href="<?= BASE_URL . "/login.php" ?>" class="btn btn-outline-secondary rounded-0 mt-3 mt-lg-0 ms-lg-4">Get Started</a>
+                        <a href="<?= base_url("explore.php") ?>" class="btn btn-outline-secondary rounded-0 mt-3 mt-lg-0 ms-lg-4">Explore Existing Surveys</a>
 
                     <?php else : ?>
 
-                        <a href="<?= DASHBOARD_URL ?>" class="btn btn-primary text-white rounded-0" target="_blank">Start creating surveys</a>
+                        <a href="<?= DASHBOARD_URL . "/survey/create.php" ?>" class="btn btn-primary text-white rounded-0" target="_blank">Start creating surveys</a>
 
                     <?php endif ?>
 
@@ -54,7 +54,7 @@
     </section>
 
 
-    <section class="bg-light mt-5 p-5 px-lg-0 py-lg-5">
+    <section class="bg-light mt-5 p-5 px-lg-0 py-lg-5 border-top border-2 border-primary">
 
         <div class="container">
 
