@@ -18,7 +18,7 @@
         <div class="row mt-5 py-3 justify-content-between align-items-center">
 
 
-            <div class="col-lg-6 mx-auto">
+            <div class="col-12 col-md-7 col-lg-8 mx-auto">
 
                 <h3 class="text-center fw-bolder">List of available requests</h3>
 

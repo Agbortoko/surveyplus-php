@@ -14,7 +14,7 @@ use Surveyplus\App\Controllers\AnswerController;
 
     $surveys = new SurveyController();
     $questions = new QuestionController();
-    $answer_types = new AnswerCategoryController();
+    $answer_types = new AnswerCategoryController();   
     $profiles = new ProfileController();
     $answers = new AnswerController();
 
@@ -28,7 +28,7 @@ use Surveyplus\App\Controllers\AnswerController;
     $number_of_surveys = count($surveys->show_all($profile["id"]));        
     $number_of_questions = count($questions->show_all($profile["id"]));
     $number_of_answertypes = count($answer_types->show_all());
-    $number_of_answers = count($answers->showAll($profile["id"]))
+    $number_of_answers = ($answers->showAll($profile["id"])) ? count($answers->showAll($profile["id"])) : 0;
 
     // debug_array($_SESSION);
 

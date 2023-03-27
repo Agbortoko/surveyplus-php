@@ -4,6 +4,7 @@ session_start();
 
 require "../../vendor/autoload.php";
 
+header('Access-Control-Allow-Origin: *');
 header("Content-Type: application/json");
 
 use Surveyplus\App\Controllers\SurveyController;

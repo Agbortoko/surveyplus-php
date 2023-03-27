@@ -2,9 +2,15 @@
 
 use Surveyplus\App\Config\App;
 
-
 /** @var BASE_PATH The root absolute path of this project*/
 define("BASE_PATH", dirname(__DIR__, 1));
+
+
+// Load env file here
+$app = new App();
+$app->loadEnv(BASE_PATH . "/.env");
+
+
 
 /** @var BASE_URL The base url of this project */
 define("BASE_URL", App::getBaseUrl());
