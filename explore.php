@@ -12,7 +12,7 @@ if (!isset($_GET["q"]) && empty($_GET["q"])) {
     $surveys = new SurveyController();
     $allPublishedSurveys = $surveys->showAllPublished(true);
 
-    $perPage = 3;
+    $perPage = 4;
 
     if (isset($_GET['page']) && !empty($_GET["page"])) {
         $page = $_GET['page'];
@@ -42,7 +42,7 @@ if (!isset($_GET["q"]) && empty($_GET["q"])) {
     $allSurveys = $surveys->showAllPublished(true, $paginate);
 } else {
 
-    $query = isset($_GET["q"]) ? $_GET["q"] : ""; // search query
+    $query = isset($_GET["q"]) ? trim($_GET["q"]) : ""; // search query
 
     $search = [
         "q" => $query
@@ -104,7 +104,7 @@ if (!isset($_GET["q"]) && empty($_GET["q"])) {
                     <div class="col-12 col-md-8 mx-auto">
 
                         <div class="input-group">
-                            <input type="search" placeholder="Search Something" name="q" id="search" class="form-control form-control-lg rounded-0 border border-1 border-primary" value="<?= isset($_GET['q']) ? $_GET['q'] : "" ?>" required>
+                            <input type="search" placeholder="Search Something" name="q" id="search" class="form-control form-control-lg rounded-0 border border-1 border-primary" value="<?= isset($_GET['q']) ? trim($_GET['q']) : "" ?>" required>
                             <input type="hidden" name="u" value="<?= strtolower($_SERVER["HTTP_USER_AGENT"]) ?>">
 
                             <button type="submit" class="btn btn-primary rounded-0 text-white">Search</button>
