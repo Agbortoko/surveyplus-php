@@ -4,22 +4,29 @@
 
 <?php
 
+use Surveyplus\App\Controllers\AnswerController;
 use Surveyplus\App\Controllers\ProfileController;
-use Surveyplus\App\Controllers\SurveyController;
+use Surveyplus\App\Controllers\QuestionController;
 ?>
 
 <?php require DASHBOARD_PATH . "/partials/header.php" ?>
 
 <?php
 
-$profiles =  new ProfileController();
-$surveys = new SurveyController();
+if(isset($_GET["question"]) && !empty($_GET["question"]))
+{
 
+    $answers = new AnswerController();
+    $profiles =  new ProfileController();
+    
+    $questionID = $_GET["question"];
+    
+    $profile = $profiles->all_active_profiles($_SESSION["user_id"]);
+    $allAnswers = $answers->getSurveyAnswers($profile["id"], $questionID);
+    
 
+}
 
-$profile = $profiles->all_active_profiles($_SESSION["user_id"]);
-
-$allSurveys = $surveys->show_user_survey($profile["id"]);
 ?>
 
 
@@ -68,29 +75,37 @@ $allSurveys = $surveys->show_user_survey($profile["id"]);
                                 <thead>
                                     <tr>
                                         <th>Survey</th>
-                                        <th>Action</th>
+                                        <th>Question</th>
+                                        <th>SurveyTaker</th>
+                                        <th>Answer Category</th>
+                                        <th>Answer</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Action</th>
+                                        <th>Survey</th>
+                                        <th>Question</th>
+                                        <th>SurveyTaker</th>
+                                        <th>Answer Category</th>
+                                        <th>Answer</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <?php if (isset($allSurveys) && !empty($allSurveys)) : ?>
-                                        <?php foreach ($allSurveys as $survey) : ?>
+                                    <?php if (isset($allAnswers) && !empty($allAnswers)) : ?>
+                                        <?php foreach ($allAnswers as $answer) : ?>
 
                                             <tr>
-                                                <td>
-                                                    <?= $survey["name"] ?>
+                                                <td><?= $answer["survey"] ?></td>
+                                                <td><?= $answer["question"] ?></td>
+                                                <td><?= $answer["surveyTaker"] ?></td>
+                                                <td><?= $answer["answerCategory"] ?></td>
+                                                <?php $answer = json_decode($answer["answer"]) ?>
+                                                
+                                                <?php foreach($answer as $key => $value): ?>
 
-                                                </td>
+                                                    <td><?= $value ?></td>
 
-                                                <td>
-                                                    <?php $query = http_build_query(["survey" => $survey["id"] ]); ?>
-                                                    <a class="btn btn-primary rounded-0" href="<?= DASHBOARD_URL . '/answer/question.php' . '?' . $query ?>">See All Survey Questions</a>
-                                                </td>
+                                                <?php endforeach ?>
 
                                             </tr>
 

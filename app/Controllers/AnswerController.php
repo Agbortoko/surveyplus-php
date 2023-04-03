@@ -63,4 +63,17 @@ class AnswerController
 
         return false;
     }
+
+
+    public function getSurveyAnswers(int $profileID, int $questionID)
+    {
+        $answers =  $this->answers->getSurveyAnswers($profileID, $questionID);
+
+        if(count($answers) > 0)
+        {
+            return $answers;
+        }
+
+        return false;
+    }
 }

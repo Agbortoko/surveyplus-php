@@ -72,5 +72,30 @@ class Answers extends BaseModel
     }
 
 
+    public function getSurveyAnswers(int $profileID, int $questionID)
+    {
+        $sql = "SELECT 
+                a.id as answerID,
+                a.description as answer,
+                ac.name as answerCategory,
+                q.name as question,
+                st.email as surveyTaker,
+                s.name as survey,
+                s.id as surveyID
+                FROM $this->table a
+                JOIN answer_category ac
+                    ON a.answer_category_id = ac.id
+                JOIN question q
+                    ON a.question_id  = q.id
+                JOIN survey_taker st
+                    ON a.survey_taker_id = st.id
+                JOIN survey s
+                    ON st.survey_id = s.id
+                WHERE s.profile_id = $profileID AND
+                a.question_id = $questionID;                      
+        ";
+        $answers = $this->select($sql)->findAll();
+        return $answers;
+    }
 
 }
